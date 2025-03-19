@@ -1,18 +1,35 @@
 # my first example of using pydantic_ai
 #
-# create a virtual environment
+#---
+# create a virtual environment python
 #   python -m venv myenv
-# activate the virtual environment
+# activate the virtual environment python
 #   myenv\Scripts\activate
 # install the module
 #   pip install pydantic-ai
+#---
 # create requirements.txt
 #   pip freeze > requirements.txt
 # install the requirements
 #   pip install -r requirements.txt
-# run the script in windows
+# run the script in windows python
 #   set GEMINI_API_KEY=your_api_key
 #   echo %GEMINI_API_KEY%
+#   python sample.py
+# deactivate the virtual environment
+#   deactivate
+
+# create a virtual environment uv
+#   uv venv --python 3.13.1
+# activate the virtual environment uv
+#   .venv\Scripts\activate
+# initialize, install the module
+#   uv init .
+#   uv add pydantic-ai
+# run the script in windows uv
+#   set GEMINI_API_KEY=your_api_key
+#   echo %GEMINI_API_KEY%
+#   uv run sample.py
 #   python sample.py
 # deactivate the virtual environment
 #   deactivate
