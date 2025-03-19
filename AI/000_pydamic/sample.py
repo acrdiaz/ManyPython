@@ -26,6 +26,10 @@
 # initialize, install the module
 #   uv init .
 #   uv add pydantic-ai
+# create requirements.txt
+#   uv export -o requirements.txt
+# install the requirements
+#   uv pip install -r requirements.txt
 # run the script in windows uv
 #   set GEMINI_API_KEY=your_api_key
 #   echo %GEMINI_API_KEY%
