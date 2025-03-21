@@ -2,10 +2,9 @@ import google.generativeai as genai
 import chromadb
 #import os
 
-#api_key = os.getenv("GEMINI_API_KEY")
-api_key = "AIzaSyADmO6oAsSCczLhpvxnL-qsFTz1ERi0thY"
+api_key = os.getenv("GEMINI_API_KEY")
 model_name = "gemini-2.0-flash" # 'gemini-pro' or 'gemini-ultra' if you have access.
-n_results = 6
+n_results = 2
 
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel(model_name)
@@ -37,13 +36,27 @@ for person in people_data:
 def retrieve_context(query, collection):
     query_embedding = genai.embed_content(model='models/embedding-001', content=query)['embedding']
     results = collection.query(query_embeddings=[query_embedding], n_results=n_results)
-    return " ".join(results['documents'][0])
+    return results
 
 def rag_gemini(query, collection):
-    context = retrieve_context(query, collection)
-    prompt = f"Answer the question based on the following context: {context}. Question: {query}"
-    response = model.generate_content(prompt)
-    return response.text
+    # context = retrieve_context(query, collection)
+    # prompt = f"Answer the question based on the following context: {context}. Question: {query}"
+    # response = model.generate_content(prompt)
+    # return response.text
+
+    results = retrieve_context(query, collection)
+    context = " ".join(results['documents'][0])
+    similarity_score = results['distances'][0][0] #get the first distance.
+
+    # you will need to test what distance means out of context.
+    # if similarity_score > 0.5:
+    #    prompt = f"Answer the question based on the following context: {context}. Question: {query}"
+    #    response = model.generate_content(prompt)
+    #    return response.text
+    # else:
+    #     response = model.generate_content(query)
+    #     return f"This question is outside the scope of my current knowledge base :). Here is a general answer: {response.text}"
+    return similarity_score
 
 question = "When was Bob born?"
 print(question)
