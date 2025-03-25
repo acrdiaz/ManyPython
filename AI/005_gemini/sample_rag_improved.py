@@ -1,6 +1,6 @@
 import google.generativeai as genai
 import chromadb
-#import os
+import os
 
 api_key = os.getenv("GEMINI_API_KEY")
 model_name = "gemini-2.0-flash" # 'gemini-pro' or 'gemini-ultra' if you have access.
@@ -39,11 +39,6 @@ def retrieve_context(query, collection):
     return results
 
 def rag_gemini(query, collection):
-    # context = retrieve_context(query, collection)
-    # prompt = f"Answer the question based on the following context: {context}. Question: {query}"
-    # response = model.generate_content(prompt)
-    # return response.text
-
     results = retrieve_context(query, collection)
     context = " ".join(results['documents'][0])
     similarity_score = results['distances'][0][0] #get the first distance.
@@ -56,6 +51,7 @@ def rag_gemini(query, collection):
     # else:
     #     response = model.generate_content(query)
     #     return f"This question is outside the scope of my current knowledge base :). Here is a general answer: {response.text}"
+
     return similarity_score
 
 question = "When was Bob born?"
