@@ -1,36 +1,58 @@
-import os
-import asyncio
-from pydantic import SecretStr
+# pip install -U langchain-google-genai
+
 from langchain_google_genai import ChatGoogleGenerativeAI
 from browser_use import Agent
+import asyncio
+from pydantic import SecretStr
+import os
+from dotenv import load_dotenv
+import logging
 
-# Set the BROWSER environment variable to use Edge
-os.environ["BROWSER"] = "msedge"
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Load environment variables
+load_dotenv()
 
 async def main():
-    api_key = os.getenv("GEMINI_API_KEY")
-
-    prompt = f"""go to https://www.calendardate.com/todays.htm, and tell me what day it is today and the timezone.
-    """
-
-    # Initialize the model
-    llm = ChatGoogleGenerativeAI(
-        model='gemini-2.0-flash', 
-        api_key=SecretStr(os.getenv('GEMINI_API_KEY'))
-    )
-
-    # Create agent with the model
-    agent = Agent(
-        task=prompt,
-        llm=llm,
-        browser=os.environ["BROWSER"]  # Specify Edge browser AA1
-    )
-
-    # Run the agent with error handling
     try:
+        # Retrieve API key from environment variables
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            logger.error("GEMINI_API_KEY not found in environment variables.")
+            return
+
+        # Define the prompt
+        prompt = """
+            go to https://qa-tmplus.wktmdev.com/TeamMate, with credentials user: admin, pass: password
+            Open the "project section" using the main menu
+            the project section will display the list of projects,
+            Open the first project using the ribbon.
+            Once the project is opened
+            get the project url
+            log out from the application
+        """
+
+        # Initialize the model
+        llm = ChatGoogleGenerativeAI(
+            model='gemini-2.0-flash-exp', 
+            api_key=SecretStr(api_key)
+        )
+
+        # Create agent with the model
+        agent = Agent(
+            task=prompt,
+            llm=llm
+        )
+
+        # Run the agent
+        logger.info("Running agent...")
         await agent.run()
+        logger.info("Agent execution completed.")
+
     except Exception as e:
-        print(f"Error running agent: {e}")
+        logger.error(f"An error occurred: {e}")
 
 asyncio.run(main())
 
@@ -46,4 +68,4 @@ asyncio.run(main())
     #   logout from the system
     # """
 
-print(os.environ["BROWSER"])
+#print(os.environ["BROWSER"])
