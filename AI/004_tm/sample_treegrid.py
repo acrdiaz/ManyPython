@@ -1,16 +1,38 @@
 # pip install langchain-google-genai
 # pip install browser-use
+# pip install requests
 
-from langchain_google_genai import ChatGoogleGenerativeAI
 from browser_use import Agent
-import asyncio
-from pydantic import SecretStr
-import os
 from dotenv import load_dotenv
+from langchain_google_genai import ChatGoogleGenerativeAI
 from typing import Optional
+from pydantic import SecretStr
+import asyncio
+import os
+import logging
+import requests
 
 # Load environment variables securely
 load_dotenv()
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+def send_notification(message: str):
+    """
+    Send a notification with the given message.
+    """
+    try:
+        # Example: Send a POST request to a webhook or notification service
+        webhook_url = os.getenv("WEBHOOK_URL")
+        if webhook_url:
+            response = requests.post(webhook_url, json={"text": message})
+            response.raise_for_status()
+            logging.info("Notification sent successfully.")
+        else:
+            logging.warning("WEBHOOK_URL not set. Notification not sent.")
+    except Exception as e:
+        logging.error(f"Failed to send notification: {str(e)}")
 
 async def navigate_treegrid() -> Optional[str]:
     """
@@ -19,39 +41,32 @@ async def navigate_treegrid() -> Optional[str]:
     try:
         # Load API key from environment
         api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            raise ValueError("Missing GEMINI_API_KEY in environment variables")
 
         # Concise, targeted prompt
-        # project:
-        # 05: German - Translations.com - Project
         prompt = """
         Workflow for TreeGrid Navigation:
 
         1. Login to https://rc-sample.wktmdev.com/TeamMate
-        - Username: admin.cd
-        - Password: password
+        - Use credentials: admin.cd password
 
         2. Navigate to Project Section:
         - Open the main menu
         - Select the 'Project' section
-        - Open the project: 05: German - Translations.com - Project
-        - To open a project, use double-click or use the ribbon button 'Open'
-        - Ensure the project is opened and fully loaded
+        - The list displays all projects
+        - Click on the project name: 05: German - Translations.com - Project
+        - Open it using double-click or the ribbon button 'Open'
 
-        3. TreeGrid Exploration Strategy:
-        - Confirm the tree grid is loaded
-        - Identify the total number of rows
-        - Focus on:
-            * Rows that can be expanded
-            * Handling multi-level hierarchies
-            * Collecting key information from expanded rows
-
-        4. Specific Task:
-        - Check if the node 'Corporate Accounting' is expanded
-        - If collapsed, expand the node 'Corporate Accounting'
-        - List the names of the 1st level children (objects) in JSON format like:
+        3. TreeGrid Exploration:
+        - review expand/collapse status for node 'Corporate Accounting'
+        - if node is collapsed then expand the node 'Corporate Accounting'
+        - the node 'Corporate Accounting' has children, List the names of the 1st level children (objects) in JSON format like:
         {"children": ["Child1", "Child2", ...]}
+        - Log any issues encountered during tree grid exploration
 
         Key Exploration Guidelines:
+        - treegrid Focus on the rows, not the columns
         - Expand rows systematically
         - Handle partially expanded rows
         - Avoid redundant expansions
@@ -86,20 +101,18 @@ async def navigate_treegrid() -> Optional[str]:
         return result.history[-1].result[-1].extracted_content
 
     except Exception as e:
-        print(f"Error: {str(e)}")
+        logging.error(f"Error: {str(e)}")
+        send_notification(f"Error encountered: {str(e)}")
         return None
 
 async def main():
-    if not os.getenv("GEMINI_API_KEY"):
-        raise ValueError("Missing GEMINI_API_KEY in environment variables")
-    
     response = await navigate_treegrid()
     
     if response:
-        print("Successfully retrieved data:")
-        print(response)
+        logging.info("Successfully retrieved data:")
+        logging.info(response)
     else:
-        print("Failed to retrieve data")
+        logging.error("Failed to retrieve data")
 
 if __name__ == "__main__":
     asyncio.run(main())
