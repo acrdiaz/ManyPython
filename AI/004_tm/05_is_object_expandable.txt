@@ -1,0 +1,5 @@
+Implementation Steps:
+- Navigate to https://rc-sample.wktmdev.com/TeamMate/Project#/Project?assessmentId=45&assessmentState=1&projectId=56.
+- Locate the objects titled 'Risk with items 7 A' and 'Risk with Items' in the tree grid.
+- Check if these objects are expandable.
+- Return the status as "expandable" or "not expandable". If the object is expandable, indicate if it is "expanded".

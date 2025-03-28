@@ -1,12 +1,13 @@
 Key Exploration Guidelines:
-- There is a grid component with a hierarchy of elements, referred to as treegrid
+- There is a grid component with a hierarchy of objects, referred to as treegrid
 - The treegrid has the CSS classes: treegrid, datatableworksheet, worksheet
-- The treegrid has a hierarchy of elements in the rows; columns display the fields of every element
+- The treegrid has a hierarchy of objects in the rows; columns display the fields of every object
 - Handle partially expanded rows
 - Avoid redundant expansions
+- Some objects may not be expandable and do not have children.
 
 Special Considerations:
 - The expand/collapse control is located to the left
-- Use the '>>' ShowDetails button to display the 'Form View' panel
+- Use the '>>' ShowDetails button to Open Form View panel
 - Use the kebab menu (three vertical dots) for more options: expand, add objects to the tree
-- Some tree elements may be collapsed, while others may be expanded
+- Some tree objets may be collapsed, while others may be expanded

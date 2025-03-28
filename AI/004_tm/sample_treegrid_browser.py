@@ -96,11 +96,11 @@ async def main():
         model_name = input("Enter the model name (ChatGPT or Gemini): ")
         llm = select_llm(model_name)
 
-        # # prompt a -- interact tree grid
-        # prompt, additional_information = load_files('01_prompt_add_procedure.txt', 'additional_information_treegrid.txt')
-        # await run_agent(prompt, additional_information, llm)
+        # prompt a -- add a Risk with a title
+        prompt, additional_information = load_files('01_prompt_add_procedure.txt', 'additional_information_treegrid.txt')
+        await run_agent(prompt, additional_information, llm)
 
-        # # prompt b -- provide summary -- AA1: in progress
+        # # prompt b -- provide summary from an exiting object
         # # try to add this back
         # # - Locate the treegrid element 'Corporate Accounting' and expand it
         # prompt, additional_information = load_files('02_prompt_extract_text.txt', 'additional_information_treegrid.txt')
@@ -110,8 +110,17 @@ async def main():
         # summary = await get_summary(prompt, page_content, llm)
         # print("\nAI Summary:\n", summary)
 
-        # prompt c -- detect if an element/object status is expanded or collapsed
-        # ...
+        # # prompt c -- detect if a parent object status is expanded or collapsed # expand
+        # prompt, additional_information = load_files('04_prompt_get_status.txt', 'additional_information_treegrid.txt')
+        # await run_agent(prompt, additional_information, llm)
+
+        # # prompt d -- detect if object is expandable, and if it is expanded # expand
+        # prompt, additional_information = load_files('05_is_object_expandable.txt', 'additional_information_treegrid.txt')
+        # await run_agent(prompt, additional_information, llm)
+
+        # prompt d -- list object with type # object type -- in progress has bug
+        # prompt, additional_information = load_files('06_list_objects_by_type.txt', 'additional_information_treegrid.txt')
+        # await run_agent(prompt, additional_information, llm)
 
 
     except (FileNotFoundError, ValueError) as e:

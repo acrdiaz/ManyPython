@@ -1,8 +1,8 @@
 Specific Task:
-- Navigate to https://rc-sample.wktmdev.com/TeamMate/Project#/Project?assessmentId=45&assessmentState=1&projectId=56
-- Locate the treegrid element 'Corporate Accounting'
-- Use the kebab menu to select Add, then select 'Risk'
+- Navigate to https://rc-sample.wktmdev.com/TeamMate/Project#/Project?assessmentId=11&assessmentState=1&projectId=4
+- Select the treegrid object of type entity with title 'Income Tax'
+- Use the kebab menu to show the Add option, then select 'Risk'
 - Ensure the 'Risk' option is selected correctly
 - Once the new Risk is added, it is called 'New'
-- Open the 'Form View' panel, change the title from 'New' to 'Risk with items 7 A'
+- Open the 'Form View' panel, change the title 'New' to 'Risk with items 7 A'
 - Close the 'Form View'
