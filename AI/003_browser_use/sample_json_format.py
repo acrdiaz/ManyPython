@@ -21,7 +21,7 @@ async def get_today_info() -> Optional[str]:
         """
         
         llm = ChatGoogleGenerativeAI(
-            model="gemini-2.0-flash-exp",
+            model="gemini-2.0-flash",
             api_key=SecretStr(os.getenv("GEMINI_API_KEY")),
             temperature=0.3  # More deterministic output
         )

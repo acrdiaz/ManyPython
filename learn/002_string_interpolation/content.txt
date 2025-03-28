@@ -1,0 +1,7 @@
+>>>
+file: content.txt
+
+Hi, {name} how are you?
+
+{language} is cool!
+>>>

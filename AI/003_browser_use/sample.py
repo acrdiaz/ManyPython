@@ -17,7 +17,7 @@ async def main():
 
   # Initialize the model
   llm = ChatGoogleGenerativeAI(
-      model='gemini-2.0-flash-exp', 
+      model='gemini-2.0-flash', 
       api_key=SecretStr(os.getenv('GEMINI_API_KEY'))
   )
 
