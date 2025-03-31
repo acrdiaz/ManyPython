@@ -1,0 +1,20 @@
+Task: Get the kebab menu options from Income Tax folder's
+
+1. Navigate to:
+   https://rc-sample.wktmdev.com/TeamMate/Project#/Project?assessmentId=11&assessmentState=1&projectId=4
+
+2. Find the "Income Tax" folder in the treeview
+   - Look specifically for "Income Tax" with a briefcase/folder icon next to it
+   - Do NOT select any "Income Tax" item that has a different icon
+   - Click directly on the row containing "Income Tax" with the briefcase icon to set focus
+   - The row should highlight when focused
+
+3. After focusing on the row:
+   - Wait 1-2 seconds for the UI to update
+   - Look for a kebab menu (three vertical dots) that appears on the right side of the row
+   - Click ONLY on the kebab menu button (three vertical dots)
+
+4. When the kebab menu dropdown opens:
+   - Extract the text of each menu option
+   - Do NOT include main menu options - ONLY the options from the kebab menu
+   - Result in json format

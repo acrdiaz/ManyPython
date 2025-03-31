@@ -60,7 +60,16 @@ def select_llm(model_name):
     else:
         raise ValueError(f"Unsupported model name: {model_name}")
 
-async def run_agent(prompt, additional_information, context, llm):
+async def run_agent(prompt, additional_information, llm):
+
+    context = "This task involves navigating to a specific URL and counting visible nodes in a treeview without expanding any nodes."
+    # context: Dict[str, Any] = {
+    #     "url": "https://rc-sample.wktmdev.com/TeamMate/Project#/Project?assessmentId=11&assessmentState=1&projectId=4",
+    #     "search_term": "Income Tax",
+    #     "count_visible_only": True,
+    #     "report_fields": ["total_count", "exact_text_content"]
+    # }
+
     agent = Agent(
         task=prompt,
         message_context=additional_information,
@@ -68,7 +77,6 @@ async def run_agent(prompt, additional_information, context, llm):
         llm=llm,
         # planner_llm=ChatOpenAI(model='o3-mini'),
         browser=BROWSER,
-        # retry_attempts=1  # Set to 1 retry attempt
         max_failures=1,               # Number of allowed consecutive failures
         retry_delay=5,                # Delay between retries in seconds
         use_vision=True,              # Enable visual understanding of the page
@@ -119,37 +127,15 @@ async def main():
             os.chdir(Path(cwd).joinpath('AI/004_tm'))
 
         file_scenario = '102_get_treegrid_folder_display_kebab.txt'
-        context = "This task involves navigating to a specific URL and counting visible nodes in a treeview without expanding any nodes."
-        print(f'Running scenario: {file_scenario}\n')
+        prompt, additional_information = load_files(
+            file_scenario, 
+            'additional_information_treegrid.txt')
+        print(f'Running scenario: {file_scenario}')
 
         model_name = input("Enter the model name (ChatGPT or Gemini): ")
         llm = select_llm(model_name)
-
-        # prompt a -- add a Risk with a title
-        prompt, additional_information = load_files(file_scenario, 'additional_information_treegrid.txt')
-        await run_agent(prompt, additional_information, context, llm)
-
-        # # prompt b -- provide summary from an exiting object
-        # # try to add this back
-        # # - Locate the treegrid element 'Corporate Accounting' and expand it
-        # prompt, additional_information = load_files('02_prompt_extract_text.txt', 'additional_information_treegrid.txt')
-        # page_content = await run_agent(prompt, additional_information, llm)
- 
-        # prompt = load_file('03_prompt_get_summary.txt')
-        # summary = await get_summary(prompt, page_content, llm)
-        # print("\nAI Summary:\n", summary)
-
-        # # prompt c -- detect if a parent object status is expanded or collapsed # expand
-        # prompt, additional_information = load_files('04_prompt_get_status.txt', 'additional_information_treegrid.txt')
-        # await run_agent(prompt, additional_information, llm)
-
-        # # prompt d -- detect if object is expandable, and if it is expanded # expand
-        # prompt, additional_information = load_files('05_is_object_expandable.txt', 'additional_information_treegrid.txt')
-        # await run_agent(prompt, additional_information, llm)
-
-        # prompt d -- list object with type # object type -- in progress has bug
-        # prompt, additional_information = load_files('06_list_objects_by_type.txt', 'additional_information_treegrid.txt')
-        # await run_agent(prompt, additional_information, llm)
+        
+        await run_agent(prompt, additional_information, llm)
 
 
     except (FileNotFoundError, ValueError) as e:
