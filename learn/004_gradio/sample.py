@@ -77,11 +77,11 @@ async def run_browser_task(
 ) -> str:
     if not api_key.strip():
         if 'chatgpt' in model:
-            api_key = os.getenv('OPENAI_API_KEY')
+            api_key = os.getenv('OPENAI_API_KEY') or ""
         if 'gemini' in model:
-            api_key = os.getenv('GEMINI_API_KEY')
+            api_key = os.getenv('GEMINI_API_KEY') or ""
         if not api_key:
-            return 'Please provide an API key or set OPENAI_API_KEY environment variable'
+            return 'Please provide an API key or set the environment variable'
 
     llm = select_llm(model, api_key)
 
@@ -96,11 +96,12 @@ async def run_browser_task(
             task=task,
             llm=llm,
             browser=BROWSER,
+            # headless=headless,
         )
         history = await agent.run()
         result = history.final_result()
         #  The result cloud be parsed better
-        return result
+        return result or ""
     except Exception as e:
         return f'Error: {str(e)}'
 

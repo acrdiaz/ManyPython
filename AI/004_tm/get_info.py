@@ -46,15 +46,14 @@ def select_llm(model_name):
             model='gpt-4o-mini',
             timeout=100,
             temperature=0.0,
-            stop=None,
-            max_tokens=1500)
+            max_tokens=1500
+            )
     elif model_name.lower() == 'gemini':
         return ChatGoogleGenerativeAI(
             model='gemini-2.0-flash', 
             api_key=os.getenv('GEMINI_API_KEY'),
             timeout=100,               # Maximum time to wait for a response (in seconds)
             temperature=0.0,           # Controls randomness; 0.0 for deterministic output
-            stop=None,                 # Stopping sequence for the model's output
             max_tokens=1500            # Maximum number of tokens in the generated response
             )
     else:
