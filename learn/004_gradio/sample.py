@@ -54,10 +54,10 @@ def select_llm(model_name, api_key):
     if 'chatgpt' in model_name.lower():
         return ChatOpenAI(
             model='gpt-4o-mini',
-            timeout=100,
-            temperature=0.0,
-            stop=None,
-            max_tokens=1500)
+            timeout=100,               # Maximum time to wait for a response (in seconds)
+            temperature=0.0,           # Controls randomness; 0.0 for deterministic output
+            stop=None,                 # Stopping sequence for the model's output
+            max_tokens=1500)           # Maximum number of tokens in the generated response
     elif 'gemini' in model_name.lower():
         return ChatGoogleGenerativeAI(
             model='gemini-2.0-flash', 
@@ -65,8 +65,7 @@ def select_llm(model_name, api_key):
             timeout=100,               # Maximum time to wait for a response (in seconds)
             temperature=0.0,           # Controls randomness; 0.0 for deterministic output
             stop=None,                 # Stopping sequence for the model's output
-            max_tokens=1500            # Maximum number of tokens in the generated response
-            )
+            max_tokens=1500)           # Maximum number of tokens in the generated response
     else:
         raise ValueError(f"Unsupported model name: {model_name}")
 
@@ -86,20 +85,21 @@ async def run_browser_task(
 
     llm = select_llm(model, api_key)
 
-    browser = Browser(
+    BROWSER = Browser(
         config=BrowserConfig(
-            # Specify the path to your Chrome executable
-            browser_binary_path='C:\\Users\\AA1\\AppData\\Local\\Programs\\Opera GX\\opera.exe',
+            chrome_instance_path='C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
         )
     )
+
     try:
         agent = Agent(
             task=task,
             llm=llm,
-            browser=browser,
+            browser=BROWSER,
         )
-        result = await agent.run()
-        #  TODO: The result cloud be parsed better
+        history = await agent.run()
+        result = history.final_result()
+        #  The result cloud be parsed better
         return result
     except Exception as e:
         return f'Error: {str(e)}'
