@@ -21,6 +21,7 @@ Special Considerations:
 - The expand/collapse control is located to the left of each node
 - Nodes with children have an expand/collapse button
 - Some nodes may be collapsed, while others may be expanded
+- For vertical scrolling, use only the tree grid's built-in vertical scroll mechanism
 
 Technical Details:
 - Treeview nodes have data attributes: data-auto-node, data-auto-nodekey, data-auto-nodetitle

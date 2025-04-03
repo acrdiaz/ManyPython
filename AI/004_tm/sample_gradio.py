@@ -131,13 +131,39 @@ async def run_browser_task(
     try:
         agent = Agent(
             task=task,
+            message_context=additional_information,
+            context=context,
             llm=llm,
+            # planner_llm=ChatOpenAI(model='o3-mini'),
             browser=BROWSER,
-            # headless=headless,
+            # retry_attempts=1  # Set to 1 retry attempt
+            max_failures=1,               # Number of allowed consecutive failures
+            retry_delay=5,                # Delay between retries in seconds
+            use_vision=True,              # Enable visual understanding of the page
+            max_actions_per_step=3,       # Limit actions per step to prevent overloading
+            include_attributes=[          # Customize which attributes to consider
+                'title', 'type', 'name', 
+                'role', 'aria-label',
+                'data-auto-node',       # Unique node identifier
+                'data-auto-nodekey',    # Node key for identification
+                'data-auto-nodetitle',  # Node title
+                'aria-expanded',        # Expansion state
+                'id',                   # Unique DOM id
+                'class',                # CSS classes
+                'data-auto-icon',       # Icon identifier
+                'draggable',            # Drag state
+                'data-auto-node__active', # Active state
+                'data-auto-button',     # Button identifier
+                'data-auto-contextualmenu', # Context menu identifier
+                'data-auto-menu'        # Menu identifier
+            ],
+            validate_output=False,         # Enable output validation
+            max_input_tokens=64000,       # Adjust token limit based on your model
+            planner_interval=2            # Run planner every 2 steps
         )
         history = await agent.run()
         result = history.final_result()
-        ...get_summary
+        # ...get_summary AA1 maybe not here
         #  The result cloud be parsed better
         return result or ""
     except Exception as e:
