@@ -19,6 +19,7 @@ load_dotenv()
 
 
 DEFAULT_LLM = 'gemini-2.0-flash'
+DEFAULT_PROMPT = 'What is todays date in Spanish'
 
 
 @dataclass
@@ -103,8 +104,8 @@ async def run_browser_task(
             llm=llm,
             browser=BROWSER,
         )
-        result = await agent.run()
-        #  TODO: The result cloud be parsed better
+        history = await agent.run()
+        result = history.final_result()
         return result
     except Exception as e:
         return f'Error: {str(e)}'
@@ -112,15 +113,15 @@ async def run_browser_task(
 
 def create_ui():
     with gr.Blocks(title='Browser Use GUI') as interface:
-        gr.Markdown('# Browser Use Task Automation')
+        gr.Markdown('# Browser Use AI Task Automation')
 
         with gr.Row():
             with gr.Column():
                 task = gr.Textbox(
                     label='Task Description',
-                    placeholder='E.g., today's date in spanish',
+                    placeholder=f"E.g., {DEFAULT_PROMPT}",
                     lines=3,
-                    value='today's date in spanish'
+                    value=DEFAULT_PROMPT
                 )
                 model = gr.Dropdown(choices=['gemini-2.0-flash', 'gpt-4o-mini', 'gpt-4', 'gpt-3.5-turbo'], label='Model', value=DEFAULT_LLM)
                 headless = gr.Checkbox(label='Run Headless', value=False)
