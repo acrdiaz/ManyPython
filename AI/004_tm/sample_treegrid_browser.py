@@ -67,7 +67,7 @@ async def run_agent(prompt, additional_information, context, llm):
         message_context=additional_information,
         context=context,
         llm=llm,
-        # planner_llm=ChatOpenAI(model='o3-mini'),
+        # planner_llm=ChatOpenAI(model='chatgpt-o4-mini'),
         browser=BROWSER,
         # retry_attempts=1  # Set to 1 retry attempt
         max_failures=1,               # Number of allowed consecutive failures
@@ -119,9 +119,7 @@ async def main():
         if '004_tm' not in cwd:
             os.chdir(Path(cwd).joinpath('AI/004_tm'))
 
-        file_scenario = '01_prompt_add_procedure.txt'
         context = "This task involves navigating to a specific URL and counting visible nodes in a treeview without expanding any nodes."
-        print(f'Running scenario: {file_scenario}\n')
 
         model_name = input("Enter the model name (ChatGPT or Gemini): ")
         llm = select_llm(model_name)
@@ -130,7 +128,6 @@ async def main():
 
         if 'a' in prompt_scenatio:
             # prompt a -- add a Risk with a title
-            # '102_get_treegrid_folder_display_kebab.txt' -- draft
             # Good
             prompt, additional_information = load_files('01_prompt_add_procedure.txt', 'additional_information_treegrid.txt')
             await run_agent(prompt, additional_information, context, llm)
