@@ -1,6 +1,7 @@
 Specific Task:
 - Navigate to https://rc-sample.wktmdev.com/TeamMate/Project#/Project?assessmentId=45&assessmentState=1&projectId=56
+- Find node 'DSS_PPS_RISK' expand the node (if node is collapsed)
 - Locate the treegrid element 'Access Control Enhancement'
 - Open the 'Form View' panel
-- Extract the content of the 'Form View' panel from the fields: Description, Notes, and return it as plain text.
+- Extract the content from the fields: Description, Notes. Return it as plain text.
 - Close the 'Form View'

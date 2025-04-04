@@ -119,9 +119,7 @@ async def main():
         if '004_tm' not in cwd:
             os.chdir(Path(cwd).joinpath('AI/004_tm'))
 
-        file_scenario = '01_prompt_add_procedure.txt'
         context = "This task involves navigating to a specific URL and counting visible nodes in a treeview without expanding any nodes."
-        print(f'Running scenario: {file_scenario}\n')
 
         model_name = input("Enter the model name (ChatGPT or Gemini): ")
         llm = select_llm(model_name)
