@@ -1,7 +1,7 @@
 Specific Task:
 - Navigate to https://rc-sample.wktmdev.com/TeamMate/Project#/Project?assessmentId=45&assessmentState=1&projectId=56
 - Select the treegrid object of type entity with title 'Corporate Accounting'
-- Use the kebab menu to show the 'Add' option, then select 'Risk'
+- Click the kebab menu to display the 'Add' option, then select 'Risk'
 - The new Risk is added, it has title 'New'
 - Open the 'Form View' panel, change the title 'New' to 'Risk with Friday Demo'
 - Close the 'Form View'
