@@ -1,0 +1,7 @@
+Specific Task:
+- Navigate to https://rc-sample.wktmdev.com/TeamMate/Project#/Project?assessmentId=11&assessmentState=1&projectId=4.
+- Locate the tree grid.
+- Retrieve the list of objects in the tree grid.
+- For each object, search within its child elements to find the SVG element.
+- Identify the type of each object based on the icon property within the SVG element (e.g., icon="icon-object-risk" for a 'Risk').
+- Return the list of objects along with their types.

@@ -1,0 +1,4 @@
+Specific Task:
+- Navigate to https://rc-sample.wktmdev.com/TeamMate/Project#/Project?assessmentId=11&assessmentState=1&projectId=4
+- Locate the treegrid object with the title 'Income Tax'
+- Identify and list the buttons associated with the 'Income Tax' object

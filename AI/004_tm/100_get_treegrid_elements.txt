@@ -1,0 +1,40 @@
+Task: Identify the visible treegrid elements and hierarchy
+
+1. Navigate to:
+   https://rc-sample.wktmdev.com/TeamMate/Project#/Project?assessmentId=11&assessmentState=1&projectId=4
+
+2. Strict rules:
+   - Absolutely no scrolling allowed (no scroll_up or scroll_down)
+   - Only interact with elements fully visible in the viewport
+   - If elements aren't fully visible, report them as not found
+
+3. Locate the treeview container:
+   - Find div with class "tv-treeview" (must be in viewport)
+   - Verify data-auto-treeview attribute
+
+4. Locate the treegrid within the treeview:
+   - Find div with class "tv-treegrid" (must be in viewport)
+   - Verify data-auto-treegrid attribute
+   - Check for header div with class "tv-treegrid-header" (must be in viewport)
+
+5. Check for elements in the treegrid:
+   - Count how many rows are visible in the treegrid
+   - Identify if there is a hierarchical structure (parent-child relationships)
+   - Check if any rows have expand/collapse controls
+   - Report the data-row-id and data-object-type of visible rows
+
+6. Verify visible columns (must be in viewport):
+   - Title
+   - State
+   - Document
+   - Test Manager
+   - Tester
+   - Due Date
+
+7. Check key elements (must be in viewport):
+   - Search button (data-auto-button="317")
+   - Resizable columns (tm-cols-resizable)
+
+Failure conditions:
+   - If elements require scrolling to be visible, report them as not found
+   - If scrolling is attempted, terminate the task immediately

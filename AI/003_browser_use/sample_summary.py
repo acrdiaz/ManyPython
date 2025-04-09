@@ -12,7 +12,7 @@ load_dotenv()
 # Configuration constants
 TARGET_URL = 'https://en.wikipedia.org/wiki/Audit_working_papers' #'https://en.wikipedia.org/wiki/Summary'
 SUMMARY_LENGTH = 2  # sentences
-MODEL_NAME = 'gemini-2.0-flash-exp'
+MODEL_NAME = 'gemini-2.0-flash'
 
 async def main():
     # Retrieve the API key from environment variables

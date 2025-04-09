@@ -1,0 +1,6 @@
+Summarize the following content in exactly {summary_length} concise sentences.
+Focus on key facts and main ideas.
+Return only the summary without additional commentary.
+
+Content:
+{content_size}  # Limit input size to avoid exceeding token limits

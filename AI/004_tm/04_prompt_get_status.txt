@@ -1,0 +1,5 @@
+Implementation Steps:
+- Navigate to https://rc-sample.wktmdev.com/TeamMate/Project#/Project?assessmentId=45&assessmentState=1&projectId=56.
+- Locate 'DSS_PPS_RISK' in the tree grid.
+- Check if 'DSS_PPS_RISK' is expanded or collapsed.
+- Return the status as "expanded" or "collapsed".

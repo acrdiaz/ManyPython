@@ -1,0 +1,37 @@
+Important information about the treeview and treegrid:
+- The page contains a treeview component that displays hierarchical nodes
+- These nodes are presented in a treegrid format with columns
+- Some nodes may be parent folders, others may be child items
+
+Menu Information:
+- The page contains multiple types of menus:
+  * Main toolbar menu (at the top of the page)
+  * Section header menus (at the top of sections)
+- The kebab menu is a small popup with only a few options
+
+Key Exploration Guidelines:
+- The treeview component manages the hierarchical relationship between nodes
+- Nodes in the treeview are displayed as rows in the treegrid
+- The treegrid has CSS classes: treegrid, datatableworksheet, worksheet
+- The treeview has a hierarchy of nodes; treegrid columns display the fields of every node
+- Avoid expanding collapsed nodes
+- Some nodes may not be expandable and do not have children
+
+Special Considerations:
+- The expand/collapse control is located to the left of each node
+- Nodes with children have an expand/collapse button
+- Some nodes may be collapsed, while others may be expanded
+
+
+Technical Details:
+- Treeview nodes have data attributes: data-auto-node, data-auto-nodekey, data-auto-nodetitle
+- Treegrid rows have data attributes: data-row-id, data-object-type
+- Each node has a unique identifier
+- The kebab menu button might have attributes like data-auto-button or data-auto-contextualmenu
+- The kebab menu popup might have attributes like data-auto-menu or similar
+
+Special Considerations:
+- The expand/collapse control is located to the left
+- Use the '>>' ShowDetails button to Open Form View panel
+- Use the kebab menu (three vertical dots) for more options: expand, add objects to the tree
+- Some tree objets may be collapsed, while others may be expanded

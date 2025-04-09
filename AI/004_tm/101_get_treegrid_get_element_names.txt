@@ -1,0 +1,13 @@
+Task: Count Income Tax nodes in treeview
+
+1. Navigate to:
+   https://rc-sample.wktmdev.com/TeamMate/Project#/Project?assessmentId=11&assessmentState=1&projectId=4
+
+2. Find all "Income Tax" nodes in the treeview
+   - Look for text containing exactly "Income Tax"
+   - Do not click any expand buttons
+   - Only count what's immediately visible
+
+3. Report only:
+   - Total number of "Income Tax" nodes found
+   - Their exact text content
