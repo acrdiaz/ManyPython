@@ -117,6 +117,7 @@ async def run_browser_task(
     api_key: str,
     model: str = 'gpt-4o',
     headless: bool = True,
+    additional_information: str = "",  # Add additional_information as a parameter
 ) -> str:
     if not api_key.strip():
         if 'chatgpt' in model:
@@ -129,10 +130,11 @@ async def run_browser_task(
     llm = select_llm(model, api_key)
 
     try:
+        context = {}  # Initialize context as an empty dictionary
         agent = Agent(
             task=task,
-            message_context=additional_information,
-            context=context,
+            message_context=additional_information,  # Use the passed additional_information
+            context=context,  # Use the initialized context
             llm=llm,
             # planner_llm=ChatOpenAI(model='o3-mini'),
             browser=BROWSER,
@@ -218,9 +220,14 @@ def create_ui():
             outputs=[task]
         )
 
+        # Define a synchronous wrapper for the asynchronous function
+        def run_task_sync(task, api_key, model, headless, additional_information):
+            return asyncio.run(run_browser_task(task, api_key, model, headless, additional_information))
+
+        # Update the submit button click handler
         submit_btn.click(
-            fn=lambda *args: asyncio.run(run_browser_task(*args)),
-            inputs=[task, api_key, model, headless],
+            fn=run_task_sync,  # Use the synchronous wrapper
+            inputs=[task, api_key, model, headless, additional_info],
             outputs=output,
         )
 

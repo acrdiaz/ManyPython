@@ -117,7 +117,7 @@ async def main():
     try:
         cwd = os.getcwd()
         if '004_tm' not in cwd:
-            os.chdir(Path(cwd).joinpath('AI/004_tm'))
+            os.chdir(Path(cwd).joinpath('AI/004_tm/prompts'))
 
         context = "This task involves navigating to a specific URL and counting visible nodes in a treeview without expanding any nodes."
 
