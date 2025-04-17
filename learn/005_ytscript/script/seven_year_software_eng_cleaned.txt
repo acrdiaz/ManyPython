@@ -1,0 +1,569 @@
+if there's one thing I'm good at after
+seven years of being a software engineer
+is definitely creating I started as a
+simple programmer or SL developer
+whatever you want to call it working in
+robotics then went into researching into
+human consciousness at UCLA as a
+research engineer then went into NASA as
+a computer engineer and finally ended my
+professional career as a software
+engineer consultant working for big four
+and throughout this entire Journey this
+entire seven years I actually got the
+opportunity to lead many multi-million
+dollar projects work with diverse
+stakeholders of Fortune 500 compan
+companies essentially just try a piece
+of the entire pie in every single aspect
+literally now I'm a business owner and
+entrepreneur and I see a lot of
+parallels between this life and that
+life what I wanted to do today is mainly
+make a video for those of you who are
+already existing software Engineers
+those of you who wish to become a
+software engineer or those of you who
+are somewhere in the middle and are just
+you know you have everything in your
+tool you have everything in Your Arsenal
+and are just looking to find a job but
+are having difficulty to do so I don't
+want to make a promise or anything but
+if you actually take a note on
+everything that I'm talking about here
+there's no reason for you to not be able
+to make more money and be in a better
+situation than you are now by the end of
+this let's just jump right into it and
+let's get started right off the bat
+let's first talk about software
+engineering what the essence of software
+engineering what it actually is many
+people want to become a software
+engineer but don't even realize what it
+actually entails the important thing to
+realize here is you create so that's
+number one a solution in this case
+specifically a software solution to a
+problem the problem doesn't necessarily
+have to be a software problem it can be
+a non-technical problem that you create
+a technical solution for think of uber
+so with that out of the way now that we
+know what a software engineer is let's
+talk about the first piece of a advice
+that I'm going to give you and that is
+what actually makes a good software
+engineer many people think it's your
+programming knowledge how many different
+languages do you know how good are you
+at those programming languages because
+I'm sure we've all experience the 10x
+programmer right in our groups or in our
+teams whenever we're University even
+outside of University you've seen those
+really really smart individuals that
+just understand a problem just like that
+instantly right off the bat and I'm sure
+you've seen those other folks who just
+literally like eat the lead code
+problems for breakfast I refer to these
+people as 10x programmers because
+they're extremely good at one of the
+skills of a software engineer which is
+coding right programming but that's
+actually what I learned is that
+throughout my entire Journey as a junior
+developer and then a senior and finally
+a manager is that that programming is
+one of the least important skills when
+you are a software engineer so this
+might sound contradictory but let's
+understand one thing first pretty much
+any software engineer that gets these
+positions that actually gets a job guess
+what they already meet a certain bench
+line they they have a certain Baseline
+that they were able to meet to get that
+job there is no shortage of talent in
+software engineering especially nowadays
+with the actual computer science and
+computer engineering becoming such
+popular degrees it's attracting a lot of
+smart individual ual from all around the
+world from India from China you have a
+lot of talent coming into the field so
+there's really no shortage of specific
+Talent there's no such thing as oh I
+can't find somebody to do this problem
+in fact it's the complete opposite what
+makes a good software engineer is not
+necessarily the coding skills but it's
+the communication skills that sets all
+the software Engineers apart from each
+other I'll tell you one thing I've been
+in industry for well now I'm out but
+I've been in industry for a little over
+7 years every single problem or every
+single hiccup every single thing stemmed
+not from a talent or skill problem it
+was never oh I can't do this or I can't
+do this in this specific amount of time
+never it was all about communication it
+was all about because the software
+Engineers were lacking communication
+skills simple Elementary communication
+skills so right off the bat if you want
+to get into this field or if you're
+already in this field this is why I
+always recommend for people to start
+quoting less and start focusing more on
+their communication skills or just other
+soft skills now whether you are on a
+project and you're talking with
+stakeholders whether you are talking
+with your own teammates whatever it is
+you need to convey everything that you
+need to convey in a manner that other
+people can understand this isn't just
+restricted to oral communication as you
+might think no even documentation right
+whenever you're documenting your code or
+whatever you're leaving in a comments to
+help explain the next person that is
+still communication and I'm seeing a lot
+of folks at least I used to see a lot of
+folks back in the day not even knowing
+how to document things properly right
+and what would end up happening is they
+would create a buzz Factor they would
+work for one company they would be an
+excellent programmer in terms of
+technically skills wise so they would
+make all these things but because their
+communication was lacking they wouldn't
+either be able to properly communicate
+to other individuals they wouldn't leave
+any documentation behind and it would
+create a buzz Factor the next person
+that came in that had to take a look at
+their code to understand what the hell
+was happening they didn't know what to
+do and that person essentially became
+the only person who could do that
+specific thing and that company ended up
+at a loss because if that person ever
+decided to
+quit that's pretty much it right one
+thing right there is you got to work on
+your communication whether you're
+already a software engineer whether you
+want to become one does not really
+matter you need to work on your
+communication because I guarantee you
+most of you are already quite
+technically Adept this actually goes on
+to the second point for those of you who
+are struggling to get a job or those of
+you who want to switch to a better job
+the key piece of advice this is not the
+second point that I want to bring up to
+actually getting a good job to getting a
+higher promotion or getting that
+position that you want or getting into
+that big four position it's all about
+marketing it's not necessarily that they
+don't have the technical capabilities to
+pass these interviews or to even get
+these interviews in the first place or
+to get the job it's rather they don't
+have the abilities to properly display
+their skills right they don't know how
+to Market themselves so these companies
+to show them hey I can do this and you
+need me for this because I mentioned
+before there's no shortage of talent
+there's Talent everywhere in the space
+and the people who are getting these
+jobs are people who are good at
+marketing people who know how to
+differentiate themselves from other
+people and show that they have a unique
+advantage over others they have a unique
+little you know like poof the number one
+thing for this is realizing that you as
+a software engineer are not bound by
+strictly your technical skills you as a
+software engineer need to be a lot more
+Diversified when it comes to the skills
+that you consider quote unquote
+important or necessary functioning as a
+software especially in today's world as
+time goes on the technical skill cap
+actually keeps increasing because it's
+just competition is higher and higher
+but what the funny thing is too is when
+it comes to actually getting a job and
+things like that companies are starting
+to Value communication skills a lot more
+than technical skills nowadays why well
+the average software engineer now will
+completely crush the average software
+engineer from 10 or 20 years ago and
+that's simply natural because everything
+Advanced our education advanced in terms
+of learning things and now we have ai to
+also help as well right so we do things
+in a much more efficient timeline you'll
+slowly start to realize that everything
+that I'm saying is Shifting away from
+the technical aspect of things and more
+so focusing on you as an individual in
+terms of you leveraging your software
+engineering skills to you know not only
+get that better job that you want or
+which is kind of the caveat here to get
+into entrepreneurship later on I talk in
+some other videos about why software
+Engineers actually make the best
+entrepreneurs so that's my third piece
+of advice here is that if you're good at
+communication skills and you know how to
+Market yourself properly you know how to
+entice people to you know want your
+services you are already set up to
+become an entrepreneur yourself the
+reason being is many of you already are
+familiar with this whether you're at a
+job right now or you're thinking of
+getting into a software job you know
+that every two or three years you're
+going to have to change why because you
+simply outgo that position and switching
+jobs is better you get a better pay
+raise right uh you get possibly a
+promotion so there's literally no reason
+for you not to switch jobs as a result
+there's no real company loyalty software
+Engineers don't really have company
+loyalty as some of the other might have
+in other different aspects of um work in
+many cases if a software engineer stick
+with one company too long it ends up
+being a negative they end up losing out
+on a lot now there's some caveat cases
+especially if you're part of a startup
+and you have stocks you have equity in
+that company and then new IPO that's a
+completely different case but most
+people aren't like that most people
+aren't going into these startups and
+doing that most people simply want to
+get a big four position and even then if
+you look at most you know big four
+people they they'll be working at Uber
+going to Netflix going to Google going
+to Facebook and just constantly making
+that switch because there's always these
+big companies are always competing on
+who they can have right and if you can
+already differentiate yourself from
+other candidates if you already have the
+technical skills to even be able to
+apply to these jobs right you meet that
+Baseline level and you have the proper
+communication skills to not only lead a
+team but also communicate with your
+co-workers and make sure you know
+manager understand understands what
+you're doing make sure the stakeholders
+know what you're doing what you're up to
+you already have all the skills you
+really need to go on your own path and
+that's my third piece of advice the
+fourth piece of advice that I want to
+talk about here and it it's kind of like
+it Loops back the previous three in
+combination is that as a software
+engineer never forget your role as a
+Creator more than anything you are a
+Creator in fact software engineers in my
+opinion are the best creators in the
+world more so than any artist more so
+than any person construction software
+Engineers are the true creators because
+right now we're in a technology world
+right we're in a technological era most
+solutions to our problems are being done
+so technologically and guess what
+software Engineers are the creators who
+create these software Solutions you have
+extreme leverage and you have extreme
+power in your creating capabilities
+because you don't really need anybody to
+hold your hand in creating things I'll
+give you an example I I talked about
+myself with regards to actually in
+e-commerce right getting into it
+creating the landing page creating the
+website having a little bit of success
+there and I saw an individual in who
+actually left the comment they were
+creating a crypto bot so bot for
+training in crypto space but do you see
+the amount of Leverage that you can have
+a software engineer so I got into
+specifically e-commerce back then now I
+have my own consulting firm that I use a
+ml for but that individual went into
+crypto so our Leverage is we don't have
+to just construct ourselves into
+creating for one specific thing no we
+can get to pretty much any single space
+and create create a technical solution
+for even non-technical problem right in
+many aspects some of these web de
+developers that I've seen uh can
+actually go to just just local cafes
+local restaurants who don't even have a
+proper website and offer to create an
+online presence for them offer to create
+a proper website for them pretty much a
+technical solution to a non-technical
+problem right because most people would
+think oh the restaurant needs to do
+better marketing right that's why the
+versatility is so important to
+understand and many times people might
+think that well if a software engineer
+goes into another space a non- technical
+space that'll be at disadvantage but
+that is completely not true a software
+engineer will have a lot more advantage
+over every other individual in the world
+when it comes to picking up a new skill
+or learning something new how many of
+you currently as software Engineers
+excel at let's say gaming how many of
+you as software Engineers excel at the
+creative aspect of things how many of
+you as software Engineers create excel
+at problem solving things such as chess
+or things like that you see as a
+software engineer you have a core skill
+set that you develop over the years
+thinking that way thinking in terms of
+pseudo code approaching a problem bit by
+bit breaking it down it forms actual
+physical changes in your brain and the
+way you approach life completely changes
+that's why many software Engineers
+whenever they try to learn a new skill
+afterwards or they try to get into a new
+field they pick it up extremely fast
+more so than the regular person now I'm
+not saying software Engineers are the
+prime Primal human beings right they're
+better than all human beings no I'm just
+saying that software Engineers have an
+overwhelming advantage in learning new
+things and specifically getting into
+business where Prett much every single
+skill of a software engineer literally
+shines it's as if it's made for business
+the fifth piece of advice that I would
+like to give out and I think it's the
+one of the most important ones that I
+learned as well is that often times
+software Engineers they'll come to a
+point where they'll realize that the
+money that they're making is simply not
+worth it what do I mean by this I mean
+that many software Engineers throughout
+their Journey will either end up in New
+York or California if it's not remote if
+if it is remote they'll still get a job
+that is based in those countries excuse
+me in those States and maybe move to a
+state with less taxes and so on but
+nevertheless most software Engineers
+will be in those States and as you
+already know the living cost in those
+States is extremely high so most
+software Engineers will actually be
+living paycheck to paycheck and there
+was a study done about 57% of software
+Engineers actually live paycheck to
+paycheck you start to realize that the
+amount of value you are bringing to your
+own company is severely more and
+exponentially more than the amount of
+value you're getting back in return so
+the amount of money that you're getting
+in return compared to the amount of
+money that you're generating for your
+company is simply crazy and it's more so
+than any other profession that I have
+seen and witnessed personally I have
+friends who are doctors I have friends
+who are lawyers I have friends who are
+just in all sorts of you know positions
+and the amount of value that they bring
+to a company or to a business severely
+less than a software engineer now I'm
+not talking about a doctor saving a
+human life cuz there's no value to that
+but I mean in terms of just monetary
+value towards the business for example
+how much a lawyer brings to his business
+and how much he gets paid versus a
+software engineer it's not even
+comparable there are software Engineers
+who are let's say on $150,000 or
+$200,000 salaries and the work that they
+are doing is being valuated at multiple
+tens of millions of dollars some some
+companies even some folks even right
+we've seen with Zuckerberg who was a
+solo developer the amount that he
+created I mean the product that he
+created is now in a multiple of billions
+of dollars but back then if somebody
+hired him as a developer to actually
+make that product they would have
+probably paid him $1 to $200,000 and it
+just goes to show you that every single
+software engineer actually has this
+problem many people think they're paying
+a lot more than they worth but that's
+not the reality they're being paid a lot
+less than their worth and I should tell
+you something that you yourself already
+have a lot more value than you think you
+do you have a lot more to offer to the
+world than you think you do don't think
+that whatever get paid at your job is
+directly correlated to how much you're
+worth in terms of the value you can
+provide to a certain company because
+while one company might pay you a
+specific amount if you yourself go into
+the solar preneur route or an
+entrepreneur route and think of a
+solution that you come up with that can
+very well be valued in the millions if
+not tens of millions maybe even billions
+in very nuanced cases right so
+understand that as a software engineer
+you're already any job you get into any
+position you get into you're already
+starting in a position of being
+undervalued um of course if you're a
+beginner this is a different case but if
+you already have a couple years of
+experience behind your belt this is
+definitely most definitely the case
+because as mentioned before pretty much
+every single person that I worked with
+every single software engineer that I
+work with or even when I was at Nasa
+working as a computer engineer the
+amount that I was getting paid was
+nowhere near the amount of value I was
+bringing in and of course the company
+has to profit of you but most companies
+are you know running on maybe 20 to 50%
+and that's really good profit margins
+and when I saw that these companies were
+legit their multipliers were 10 to 20
+sometimes even 100 on some of these
+Engineers it was simply crazy and that's
+you know that connects back to my number
+one point with there's no shortage of
+talent there's a lot of talent in this
+field and it's just the communication
+skills that really hold people back when
+it comes to software engineering a lot
+of people are way too tunnel visioned on
+just the programming aspect of things on
+the coding aspect of things they want to
+know you know what type of developer do
+I become do become a full tack do I
+become a front end back end do I get
+into AI do I get into machine learning a
+good analogy to this would be any
+problem that you approach right you're
+not thinking of hey okay how do I solve
+this problem no you first think of why
+do I need to solve this problem in the
+first place what does it do and then you
+can understand okay how can I solve this
+problem so most people when they see a
+specific technical problem the first
+question they ask is how but you should
+always first ask why why do I need to
+solve this problem that's pretty much
+the most important things that that I
+wanted to discuss today I hope you know
+they ended up helping you at least a
+little little bit but if you truly take
+into consideration all the advice that I
+just gave you and write it down and just
+every single day try to perform in that
+manner try to understand and grasp that
+information always knowing to improve
+your communication skills as a software
+engineer always realizing your role as a
+Creator right so always looking to
+create things whether it's technical or
+non-technical solutions to problem
+and always knowing that especially if
+you want to be better if you don't even
+want to get into entrepreneurship if you
+want to just climb the corporate ladder
+you need to be able to Market yourself
+so because that's pretty much the only
+choice you really have is you need to
+get better at communicating as well as
+being able to Market yourself properly
+if you're thinking of okay how can I do
+that there's a lot of different ways
+right you can be the person who reaches
+out to people on LinkedIn you can be the
+person who sends out personalized Loom
+videos so there's always something you
+can do when it comes to communicating
+and marketing yourself that you can get
+the edge over the very next person one
+of the best things that I used whenever
+I you know every time I got into a new
+job is I would always ask my direct
+manager what I need to do to get to the
+next level in terms of the next position
+if I was a developer regular Dev I would
+ask how can I get to the senior what do
+I need to do and every week or every two
+weeks I would ask okay where am I now on
+this journey am I close am I close and
+that's why pretty much all of the
+promotions that I've had in my career
+have been in less than about 8 8 to N9
+months like three or four times faster
+than the average person because I've
+always taken things into my own hand and
+I've used my communication skills to my
+advantage and that's something that a
+lot of softw rers don't actually do so I
+don't want to leave this video on too
+like too long dragging on but let me
+know if you would like to see a specific
+video about that how to maybe go about
+communicating as a software engineer and
+how to really gain a Competitive Edge
+over the other developers and how to use
+that later to start your own business
+and actually become an entrepreneur
+yourself so without further Ado thank
+you so much for watching and as always
+have a good one

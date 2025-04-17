@@ -1,0 +1,569 @@
+00:00:00.120 if there's one thing I'm good at after
+00:00:01.680 seven years of being a software engineer
+00:00:03.520 is definitely creating I started as a
+00:00:06.240 simple programmer or SL developer
+00:00:08.160 whatever you want to call it working in
+00:00:09.480 robotics then went into researching into
+00:00:11.040 human consciousness at UCLA as a
+00:00:13.000 research engineer then went into NASA as
+00:00:14.960 a computer engineer and finally ended my
+00:00:16.760 professional career as a software
+00:00:18.279 engineer consultant working for big four
+00:00:20.480 and throughout this entire Journey this
+00:00:21.920 entire seven years I actually got the
+00:00:24.000 opportunity to lead many multi-million
+00:00:26.279 dollar projects work with diverse
+00:00:28.080 stakeholders of Fortune 500 compan
+00:00:29.960 companies essentially just try a piece
+00:00:31.880 of the entire pie in every single aspect
+00:00:34.200 literally now I'm a business owner and
+00:00:36.440 entrepreneur and I see a lot of
+00:00:38.200 parallels between this life and that
+00:00:40.079 life what I wanted to do today is mainly
+00:00:42.360 make a video for those of you who are
+00:00:44.360 already existing software Engineers
+00:00:45.960 those of you who wish to become a
+00:00:47.079 software engineer or those of you who
+00:00:48.680 are somewhere in the middle and are just
+00:00:50.559 you know you have everything in your
+00:00:51.800 tool you have everything in Your Arsenal
+00:00:53.280 and are just looking to find a job but
+00:00:54.559 are having difficulty to do so I don't
+00:00:56.079 want to make a promise or anything but
+00:00:57.840 if you actually take a note on
+00:00:59.320 everything that I'm talking about here
+00:01:00.760 there's no reason for you to not be able
+00:01:02.399 to make more money and be in a better
+00:01:04.159 situation than you are now by the end of
+00:01:06.200 this let's just jump right into it and
+00:01:08.400 let's get started right off the bat
+00:01:10.080 let's first talk about software
+00:01:11.400 engineering what the essence of software
+00:01:13.200 engineering what it actually is many
+00:01:14.840 people want to become a software
+00:01:16.040 engineer but don't even realize what it
+00:01:17.759 actually entails the important thing to
+00:01:19.520 realize here is you create so that's
+00:01:21.840 number one a solution in this case
+00:01:25.159 specifically a software solution to a
+00:01:27.560 problem the problem doesn't necessarily
+00:01:29.560 have to be a software problem it can be
+00:01:32.119 a non-technical problem that you create
+00:01:34.159 a technical solution for think of uber
+00:01:37.240 so with that out of the way now that we
+00:01:38.680 know what a software engineer is let's
+00:01:40.640 talk about the first piece of a advice
+00:01:42.280 that I'm going to give you and that is
+00:01:44.040 what actually makes a good software
+00:01:45.479 engineer many people think it's your
+00:01:48.040 programming knowledge how many different
+00:01:49.840 languages do you know how good are you
+00:01:51.640 at those programming languages because
+00:01:53.439 I'm sure we've all experience the 10x
+00:01:56.200 programmer right in our groups or in our
+00:01:58.399 teams whenever we're University even
+00:02:00.119 outside of University you've seen those
+00:02:02.759 really really smart individuals that
+00:02:05.000 just understand a problem just like that
+00:02:06.960 instantly right off the bat and I'm sure
+00:02:08.520 you've seen those other folks who just
+00:02:10.840 literally like eat the lead code
+00:02:12.760 problems for breakfast I refer to these
+00:02:14.480 people as 10x programmers because
+00:02:16.000 they're extremely good at one of the
+00:02:18.080 skills of a software engineer which is
+00:02:19.599 coding right programming but that's
+00:02:22.400 actually what I learned is that
+00:02:23.879 throughout my entire Journey as a junior
+00:02:27.080 developer and then a senior and finally
+00:02:28.519 a manager is that that programming is
+00:02:31.160 one of the least important skills when
+00:02:32.720 you are a software engineer so this
+00:02:34.440 might sound contradictory but let's
+00:02:36.879 understand one thing first pretty much
+00:02:38.840 any software engineer that gets these
+00:02:40.920 positions that actually gets a job guess
+00:02:43.440 what they already meet a certain bench
+00:02:45.560 line they they have a certain Baseline
+00:02:47.720 that they were able to meet to get that
+00:02:49.519 job there is no shortage of talent in
+00:02:51.879 software engineering especially nowadays
+00:02:54.000 with the actual computer science and
+00:02:55.879 computer engineering becoming such
+00:02:57.080 popular degrees it's attracting a lot of
+00:02:59.200 smart individual ual from all around the
+00:03:00.920 world from India from China you have a
+00:03:03.319 lot of talent coming into the field so
+00:03:05.440 there's really no shortage of specific
+00:03:07.400 Talent there's no such thing as oh I
+00:03:09.680 can't find somebody to do this problem
+00:03:11.599 in fact it's the complete opposite what
+00:03:13.560 makes a good software engineer is not
+00:03:15.480 necessarily the coding skills but it's
+00:03:17.519 the communication skills that sets all
+00:03:19.319 the software Engineers apart from each
+00:03:20.640 other I'll tell you one thing I've been
+00:03:22.080 in industry for well now I'm out but
+00:03:24.000 I've been in industry for a little over
+00:03:25.519 7 years every single problem or every
+00:03:28.400 single hiccup every single thing stemmed
+00:03:31.400 not from a talent or skill problem it
+00:03:34.480 was never oh I can't do this or I can't
+00:03:36.560 do this in this specific amount of time
+00:03:38.239 never it was all about communication it
+00:03:40.959 was all about because the software
+00:03:42.400 Engineers were lacking communication
+00:03:43.760 skills simple Elementary communication
+00:03:45.439 skills so right off the bat if you want
+00:03:47.640 to get into this field or if you're
+00:03:48.840 already in this field this is why I
+00:03:50.920 always recommend for people to start
+00:03:52.439 quoting less and start focusing more on
+00:03:54.680 their communication skills or just other
+00:03:56.560 soft skills now whether you are on a
+00:03:58.799 project and you're talking with
+00:04:00.439 stakeholders whether you are talking
+00:04:02.439 with your own teammates whatever it is
+00:04:05.079 you need to convey everything that you
+00:04:07.280 need to convey in a manner that other
+00:04:08.799 people can understand this isn't just
+00:04:10.480 restricted to oral communication as you
+00:04:12.400 might think no even documentation right
+00:04:14.519 whenever you're documenting your code or
+00:04:16.560 whatever you're leaving in a comments to
+00:04:18.000 help explain the next person that is
+00:04:20.000 still communication and I'm seeing a lot
+00:04:22.199 of folks at least I used to see a lot of
+00:04:24.759 folks back in the day not even knowing
+00:04:26.400 how to document things properly right
+00:04:28.240 and what would end up happening is they
+00:04:29.520 would create a buzz Factor they would
+00:04:31.360 work for one company they would be an
+00:04:33.199 excellent programmer in terms of
+00:04:35.440 technically skills wise so they would
+00:04:37.680 make all these things but because their
+00:04:39.680 communication was lacking they wouldn't
+00:04:41.120 either be able to properly communicate
+00:04:42.759 to other individuals they wouldn't leave
+00:04:44.560 any documentation behind and it would
+00:04:46.199 create a buzz Factor the next person
+00:04:47.560 that came in that had to take a look at
+00:04:48.840 their code to understand what the hell
+00:04:50.039 was happening they didn't know what to
+00:04:51.680 do and that person essentially became
+00:04:54.280 the only person who could do that
+00:04:56.120 specific thing and that company ended up
+00:04:58.440 at a loss because if that person ever
+00:04:59.919 decided to
+00:05:01.080 quit that's pretty much it right one
+00:05:03.520 thing right there is you got to work on
+00:05:05.039 your communication whether you're
+00:05:06.479 already a software engineer whether you
+00:05:07.759 want to become one does not really
+00:05:09.479 matter you need to work on your
+00:05:11.000 communication because I guarantee you
+00:05:12.560 most of you are already quite
+00:05:14.080 technically Adept this actually goes on
+00:05:16.080 to the second point for those of you who
+00:05:17.919 are struggling to get a job or those of
+00:05:20.080 you who want to switch to a better job
+00:05:22.319 the key piece of advice this is not the
+00:05:25.000 second point that I want to bring up to
+00:05:26.840 actually getting a good job to getting a
+00:05:28.960 higher promotion or getting that
+00:05:31.000 position that you want or getting into
+00:05:32.520 that big four position it's all about
+00:05:35.440 marketing it's not necessarily that they
+00:05:37.759 don't have the technical capabilities to
+00:05:40.000 pass these interviews or to even get
+00:05:41.400 these interviews in the first place or
+00:05:42.680 to get the job it's rather they don't
+00:05:45.000 have the abilities to properly display
+00:05:47.520 their skills right they don't know how
+00:05:49.880 to Market themselves so these companies
+00:05:51.840 to show them hey I can do this and you
+00:05:54.360 need me for this because I mentioned
+00:05:56.039 before there's no shortage of talent
+00:05:57.960 there's Talent everywhere in the space
+00:06:00.039 and the people who are getting these
+00:06:01.479 jobs are people who are good at
+00:06:03.120 marketing people who know how to
+00:06:05.039 differentiate themselves from other
+00:06:06.400 people and show that they have a unique
+00:06:08.160 advantage over others they have a unique
+00:06:10.360 little you know like poof the number one
+00:06:12.759 thing for this is realizing that you as
+00:06:15.080 a software engineer are not bound by
+00:06:17.880 strictly your technical skills you as a
+00:06:20.319 software engineer need to be a lot more
+00:06:22.880 Diversified when it comes to the skills
+00:06:25.479 that you consider quote unquote
+00:06:27.000 important or necessary functioning as a
+00:06:29.199 software especially in today's world as
+00:06:31.639 time goes on the technical skill cap
+00:06:34.039 actually keeps increasing because it's
+00:06:35.479 just competition is higher and higher
+00:06:38.039 but what the funny thing is too is when
+00:06:40.560 it comes to actually getting a job and
+00:06:42.080 things like that companies are starting
+00:06:44.039 to Value communication skills a lot more
+00:06:45.840 than technical skills nowadays why well
+00:06:48.560 the average software engineer now will
+00:06:49.840 completely crush the average software
+00:06:51.319 engineer from 10 or 20 years ago and
+00:06:53.639 that's simply natural because everything
+00:06:55.360 Advanced our education advanced in terms
+00:06:57.160 of learning things and now we have ai to
+00:06:59.080 also help as well right so we do things
+00:07:01.000 in a much more efficient timeline you'll
+00:07:02.840 slowly start to realize that everything
+00:07:04.599 that I'm saying is Shifting away from
+00:07:07.000 the technical aspect of things and more
+00:07:08.479 so focusing on you as an individual in
+00:07:10.879 terms of you leveraging your software
+00:07:13.160 engineering skills to you know not only
+00:07:16.000 get that better job that you want or
+00:07:18.440 which is kind of the caveat here to get
+00:07:20.840 into entrepreneurship later on I talk in
+00:07:22.960 some other videos about why software
+00:07:24.520 Engineers actually make the best
+00:07:25.960 entrepreneurs so that's my third piece
+00:07:27.560 of advice here is that if you're good at
+00:07:29.560 communication skills and you know how to
+00:07:30.840 Market yourself properly you know how to
+00:07:32.639 entice people to you know want your
+00:07:34.639 services you are already set up to
+00:07:37.080 become an entrepreneur yourself the
+00:07:38.599 reason being is many of you already are
+00:07:40.599 familiar with this whether you're at a
+00:07:42.120 job right now or you're thinking of
+00:07:43.639 getting into a software job you know
+00:07:45.199 that every two or three years you're
+00:07:46.240 going to have to change why because you
+00:07:48.319 simply outgo that position and switching
+00:07:50.599 jobs is better you get a better pay
+00:07:52.360 raise right uh you get possibly a
+00:07:54.879 promotion so there's literally no reason
+00:07:57.240 for you not to switch jobs as a result
+00:07:59.240 there's no real company loyalty software
+00:08:01.240 Engineers don't really have company
+00:08:02.520 loyalty as some of the other might have
+00:08:04.440 in other different aspects of um work in
+00:08:07.680 many cases if a software engineer stick
+00:08:09.400 with one company too long it ends up
+00:08:11.520 being a negative they end up losing out
+00:08:13.440 on a lot now there's some caveat cases
+00:08:15.520 especially if you're part of a startup
+00:08:17.120 and you have stocks you have equity in
+00:08:19.120 that company and then new IPO that's a
+00:08:21.080 completely different case but most
+00:08:22.240 people aren't like that most people
+00:08:23.720 aren't going into these startups and
+00:08:26.280 doing that most people simply want to
+00:08:27.800 get a big four position and even then if
+00:08:30.479 you look at most you know big four
+00:08:32.559 people they they'll be working at Uber
+00:08:35.080 going to Netflix going to Google going
+00:08:37.000 to Facebook and just constantly making
+00:08:38.640 that switch because there's always these
+00:08:40.559 big companies are always competing on
+00:08:42.719 who they can have right and if you can
+00:08:44.600 already differentiate yourself from
+00:08:46.000 other candidates if you already have the
+00:08:47.600 technical skills to even be able to
+00:08:49.480 apply to these jobs right you meet that
+00:08:51.160 Baseline level and you have the proper
+00:08:53.160 communication skills to not only lead a
+00:08:54.959 team but also communicate with your
+00:08:56.680 co-workers and make sure you know
+00:08:58.720 manager understand understands what
+00:08:59.760 you're doing make sure the stakeholders
+00:09:00.959 know what you're doing what you're up to
+00:09:02.360 you already have all the skills you
+00:09:03.440 really need to go on your own path and
+00:09:05.959 that's my third piece of advice the
+00:09:07.680 fourth piece of advice that I want to
+00:09:09.399 talk about here and it it's kind of like
+00:09:11.640 it Loops back the previous three in
+00:09:14.440 combination is that as a software
+00:09:16.760 engineer never forget your role as a
+00:09:19.360 Creator more than anything you are a
+00:09:21.800 Creator in fact software engineers in my
+00:09:24.519 opinion are the best creators in the
+00:09:26.160 world more so than any artist more so
+00:09:28.480 than any person construction software
+00:09:30.440 Engineers are the true creators because
+00:09:32.440 right now we're in a technology world
+00:09:34.160 right we're in a technological era most
+00:09:36.320 solutions to our problems are being done
+00:09:38.600 so technologically and guess what
+00:09:40.440 software Engineers are the creators who
+00:09:42.120 create these software Solutions you have
+00:09:43.800 extreme leverage and you have extreme
+00:09:45.480 power in your creating capabilities
+00:09:47.720 because you don't really need anybody to
+00:09:50.399 hold your hand in creating things I'll
+00:09:52.200 give you an example I I talked about
+00:09:53.880 myself with regards to actually in
+00:09:56.680 e-commerce right getting into it
+00:09:58.600 creating the landing page creating the
+00:10:00.519 website having a little bit of success
+00:10:02.360 there and I saw an individual in who
+00:10:04.880 actually left the comment they were
+00:10:06.360 creating a crypto bot so bot for
+00:10:08.600 training in crypto space but do you see
+00:10:10.800 the amount of Leverage that you can have
+00:10:12.200 a software engineer so I got into
+00:10:14.320 specifically e-commerce back then now I
+00:10:16.120 have my own consulting firm that I use a
+00:10:18.040 ml for but that individual went into
+00:10:20.279 crypto so our Leverage is we don't have
+00:10:23.079 to just construct ourselves into
+00:10:24.680 creating for one specific thing no we
+00:10:26.600 can get to pretty much any single space
+00:10:28.880 and create create a technical solution
+00:10:30.800 for even non-technical problem right in
+00:10:33.320 many aspects some of these web de
+00:10:35.200 developers that I've seen uh can
+00:10:37.120 actually go to just just local cafes
+00:10:39.000 local restaurants who don't even have a
+00:10:40.360 proper website and offer to create an
+00:10:42.480 online presence for them offer to create
+00:10:44.279 a proper website for them pretty much a
+00:10:46.200 technical solution to a non-technical
+00:10:47.800 problem right because most people would
+00:10:49.000 think oh the restaurant needs to do
+00:10:51.000 better marketing right that's why the
+00:10:52.839 versatility is so important to
+00:10:54.519 understand and many times people might
+00:10:56.680 think that well if a software engineer
+00:10:58.519 goes into another space a non- technical
+00:11:00.720 space that'll be at disadvantage but
+00:11:02.560 that is completely not true a software
+00:11:04.360 engineer will have a lot more advantage
+00:11:06.760 over every other individual in the world
+00:11:09.000 when it comes to picking up a new skill
+00:11:10.480 or learning something new how many of
+00:11:12.399 you currently as software Engineers
+00:11:14.000 excel at let's say gaming how many of
+00:11:16.680 you as software Engineers excel at the
+00:11:19.120 creative aspect of things how many of
+00:11:20.800 you as software Engineers create excel
+00:11:22.639 at problem solving things such as chess
+00:11:24.760 or things like that you see as a
+00:11:26.279 software engineer you have a core skill
+00:11:28.880 set that you develop over the years
+00:11:31.000 thinking that way thinking in terms of
+00:11:32.760 pseudo code approaching a problem bit by
+00:11:34.959 bit breaking it down it forms actual
+00:11:36.959 physical changes in your brain and the
+00:11:39.120 way you approach life completely changes
+00:11:41.360 that's why many software Engineers
+00:11:42.519 whenever they try to learn a new skill
+00:11:43.880 afterwards or they try to get into a new
+00:11:45.639 field they pick it up extremely fast
+00:11:47.320 more so than the regular person now I'm
+00:11:49.040 not saying software Engineers are the
+00:11:51.079 prime Primal human beings right they're
+00:11:52.839 better than all human beings no I'm just
+00:11:54.440 saying that software Engineers have an
+00:11:55.720 overwhelming advantage in learning new
+00:11:57.680 things and specifically getting into
+00:11:59.480 business where Prett much every single
+00:12:01.200 skill of a software engineer literally
+00:12:03.000 shines it's as if it's made for business
+00:12:05.399 the fifth piece of advice that I would
+00:12:07.680 like to give out and I think it's the
+00:12:10.079 one of the most important ones that I
+00:12:11.399 learned as well is that often times
+00:12:14.320 software Engineers they'll come to a
+00:12:16.040 point where they'll realize that the
+00:12:18.040 money that they're making is simply not
+00:12:20.120 worth it what do I mean by this I mean
+00:12:22.199 that many software Engineers throughout
+00:12:24.360 their Journey will either end up in New
+00:12:26.199 York or California if it's not remote if
+00:12:29.160 if it is remote they'll still get a job
+00:12:31.720 that is based in those countries excuse
+00:12:34.040 me in those States and maybe move to a
+00:12:36.720 state with less taxes and so on but
+00:12:39.000 nevertheless most software Engineers
+00:12:40.800 will be in those States and as you
+00:12:42.639 already know the living cost in those
+00:12:43.959 States is extremely high so most
+00:12:46.040 software Engineers will actually be
+00:12:47.519 living paycheck to paycheck and there
+00:12:49.160 was a study done about 57% of software
+00:12:51.240 Engineers actually live paycheck to
+00:12:52.519 paycheck you start to realize that the
+00:12:54.600 amount of value you are bringing to your
+00:12:56.320 own company is severely more and
+00:12:59.480 exponentially more than the amount of
+00:13:01.040 value you're getting back in return so
+00:13:02.839 the amount of money that you're getting
+00:13:04.320 in return compared to the amount of
+00:13:06.040 money that you're generating for your
+00:13:07.240 company is simply crazy and it's more so
+00:13:10.000 than any other profession that I have
+00:13:12.040 seen and witnessed personally I have
+00:13:14.399 friends who are doctors I have friends
+00:13:16.399 who are lawyers I have friends who are
+00:13:18.680 just in all sorts of you know positions
+00:13:21.279 and the amount of value that they bring
+00:13:22.839 to a company or to a business severely
+00:13:25.440 less than a software engineer now I'm
+00:13:27.560 not talking about a doctor saving a
+00:13:28.800 human life cuz there's no value to that
+00:13:30.600 but I mean in terms of just monetary
+00:13:32.160 value towards the business for example
+00:13:33.680 how much a lawyer brings to his business
+00:13:35.279 and how much he gets paid versus a
+00:13:36.920 software engineer it's not even
+00:13:38.680 comparable there are software Engineers
+00:13:40.600 who are let's say on $150,000 or
+00:13:43.519 $200,000 salaries and the work that they
+00:13:46.160 are doing is being valuated at multiple
+00:13:49.000 tens of millions of dollars some some
+00:13:51.560 companies even some folks even right
+00:13:53.880 we've seen with Zuckerberg who was a
+00:13:55.720 solo developer the amount that he
+00:13:57.600 created I mean the product that he
+00:13:59.519 created is now in a multiple of billions
+00:14:01.360 of dollars but back then if somebody
+00:14:03.440 hired him as a developer to actually
+00:14:04.959 make that product they would have
+00:14:06.199 probably paid him $1 to $200,000 and it
+00:14:08.800 just goes to show you that every single
+00:14:10.560 software engineer actually has this
+00:14:12.720 problem many people think they're paying
+00:14:14.199 a lot more than they worth but that's
+00:14:15.639 not the reality they're being paid a lot
+00:14:17.759 less than their worth and I should tell
+00:14:19.279 you something that you yourself already
+00:14:21.800 have a lot more value than you think you
+00:14:23.800 do you have a lot more to offer to the
+00:14:25.920 world than you think you do don't think
+00:14:28.440 that whatever get paid at your job is
+00:14:31.240 directly correlated to how much you're
+00:14:32.759 worth in terms of the value you can
+00:14:34.920 provide to a certain company because
+00:14:37.199 while one company might pay you a
+00:14:39.079 specific amount if you yourself go into
+00:14:41.839 the solar preneur route or an
+00:14:42.880 entrepreneur route and think of a
+00:14:44.880 solution that you come up with that can
+00:14:47.160 very well be valued in the millions if
+00:14:49.279 not tens of millions maybe even billions
+00:14:50.920 in very nuanced cases right so
+00:14:52.920 understand that as a software engineer
+00:14:54.199 you're already any job you get into any
+00:14:56.079 position you get into you're already
+00:14:57.800 starting in a position of being
+00:15:00.120 undervalued um of course if you're a
+00:15:01.920 beginner this is a different case but if
+00:15:03.320 you already have a couple years of
+00:15:04.399 experience behind your belt this is
+00:15:06.079 definitely most definitely the case
+00:15:08.000 because as mentioned before pretty much
+00:15:10.240 every single person that I worked with
+00:15:11.480 every single software engineer that I
+00:15:12.639 work with or even when I was at Nasa
+00:15:15.440 working as a computer engineer the
+00:15:17.040 amount that I was getting paid was
+00:15:18.600 nowhere near the amount of value I was
+00:15:20.120 bringing in and of course the company
+00:15:21.480 has to profit of you but most companies
+00:15:23.600 are you know running on maybe 20 to 50%
+00:15:28.240 and that's really good profit margins
+00:15:29.839 and when I saw that these companies were
+00:15:31.519 legit their multipliers were 10 to 20
+00:15:34.600 sometimes even 100 on some of these
+00:15:36.240 Engineers it was simply crazy and that's
+00:15:39.240 you know that connects back to my number
+00:15:41.319 one point with there's no shortage of
+00:15:43.399 talent there's a lot of talent in this
+00:15:45.440 field and it's just the communication
+00:15:46.839 skills that really hold people back when
+00:15:48.519 it comes to software engineering a lot
+00:15:50.000 of people are way too tunnel visioned on
+00:15:52.440 just the programming aspect of things on
+00:15:53.920 the coding aspect of things they want to
+00:15:55.720 know you know what type of developer do
+00:15:57.600 I become do become a full tack do I
+00:15:59.639 become a front end back end do I get
+00:16:01.199 into AI do I get into machine learning a
+00:16:03.000 good analogy to this would be any
+00:16:04.759 problem that you approach right you're
+00:16:07.000 not thinking of hey okay how do I solve
+00:16:09.680 this problem no you first think of why
+00:16:12.680 do I need to solve this problem in the
+00:16:14.120 first place what does it do and then you
+00:16:16.560 can understand okay how can I solve this
+00:16:18.519 problem so most people when they see a
+00:16:20.680 specific technical problem the first
+00:16:22.480 question they ask is how but you should
+00:16:24.360 always first ask why why do I need to
+00:16:26.120 solve this problem that's pretty much
+00:16:28.079 the most important things that that I
+00:16:29.079 wanted to discuss today I hope you know
+00:16:30.720 they ended up helping you at least a
+00:16:32.240 little little bit but if you truly take
+00:16:34.600 into consideration all the advice that I
+00:16:36.240 just gave you and write it down and just
+00:16:40.040 every single day try to perform in that
+00:16:44.480 manner try to understand and grasp that
+00:16:47.040 information always knowing to improve
+00:16:49.040 your communication skills as a software
+00:16:50.360 engineer always realizing your role as a
+00:16:52.319 Creator right so always looking to
+00:16:54.600 create things whether it's technical or
+00:16:57.440 non-technical solutions to problem
+00:16:59.480 and always knowing that especially if
+00:17:02.399 you want to be better if you don't even
+00:17:04.720 want to get into entrepreneurship if you
+00:17:06.000 want to just climb the corporate ladder
+00:17:08.160 you need to be able to Market yourself
+00:17:10.160 so because that's pretty much the only
+00:17:12.079 choice you really have is you need to
+00:17:13.799 get better at communicating as well as
+00:17:15.839 being able to Market yourself properly
+00:17:17.720 if you're thinking of okay how can I do
+00:17:19.199 that there's a lot of different ways
+00:17:20.760 right you can be the person who reaches
+00:17:23.039 out to people on LinkedIn you can be the
+00:17:24.839 person who sends out personalized Loom
+00:17:26.400 videos so there's always something you
+00:17:27.919 can do when it comes to communicating
+00:17:29.360 and marketing yourself that you can get
+00:17:30.960 the edge over the very next person one
+00:17:32.880 of the best things that I used whenever
+00:17:34.760 I you know every time I got into a new
+00:17:36.520 job is I would always ask my direct
+00:17:38.039 manager what I need to do to get to the
+00:17:40.520 next level in terms of the next position
+00:17:42.080 if I was a developer regular Dev I would
+00:17:44.000 ask how can I get to the senior what do
+00:17:45.559 I need to do and every week or every two
+00:17:48.320 weeks I would ask okay where am I now on
+00:17:50.120 this journey am I close am I close and
+00:17:52.200 that's why pretty much all of the
+00:17:53.640 promotions that I've had in my career
+00:17:54.960 have been in less than about 8 8 to N9
+00:17:57.039 months like three or four times faster
+00:17:59.159 than the average person because I've
+00:18:01.120 always taken things into my own hand and
+00:18:02.679 I've used my communication skills to my
+00:18:04.200 advantage and that's something that a
+00:18:05.679 lot of softw rers don't actually do so I
+00:18:07.679 don't want to leave this video on too
+00:18:09.960 like too long dragging on but let me
+00:18:12.000 know if you would like to see a specific
+00:18:13.640 video about that how to maybe go about
+00:18:15.760 communicating as a software engineer and
+00:18:17.760 how to really gain a Competitive Edge
+00:18:19.600 over the other developers and how to use
+00:18:21.600 that later to start your own business
+00:18:24.039 and actually become an entrepreneur
+00:18:25.480 yourself so without further Ado thank
+00:18:27.640 you so much for watching and as always
+00:18:29.600 have a good one
