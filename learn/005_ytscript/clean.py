@@ -1,3 +1,6 @@
+import os
+
+
 def remove_timestamps(input_file, output_file):
     """
     Removes timestamps from the beginning of each line in the input file
@@ -10,7 +13,8 @@ def remove_timestamps(input_file, output_file):
             outfile.write(cleaned_line)
 
 if __name__ == "__main__":
-    input_path = "d:\\_cd\\prj\\github\\ManyPython\\learn\\005_ytscript\\script\\seven_year_software_eng.txt"
-    output_path = "d:\\_cd\\prj\\github\\ManyPython\\learn\\005_ytscript\\script\\seven_year_software_eng_cleaned.txt"
+    script_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    input_path = f"{script_dir}\\learn\\005_ytscript\\script\\seven_year_software_eng.txt"
+    output_path = f"{script_dir}\\learn\\005_ytscript\\script\\seven_year_software_eng_cleaned.txt"
     remove_timestamps(input_path, output_path)
     print(f"Timestamps removed. Cleaned file saved to: {output_path}")
