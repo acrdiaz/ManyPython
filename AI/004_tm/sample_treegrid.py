@@ -48,7 +48,7 @@ async def navigate_treegrid() -> Optional[str]:
         prompt = """
         Workflow for TreeGrid Navigation:
 
-        1. Login to https://rc-sample.wktmdev.com/TeamMate
+        1. Login to ...
         - Use credentials: admin.-- password
 
         2. Navigate to Project Section:

@@ -1,18 +1,25 @@
 # pip install -U langchain-google-genai
 
+from browser_use import Agent, Browser, BrowserConfig
 from langchain_google_genai import ChatGoogleGenerativeAI
-from browser_use import Agent
-import asyncio
 from pydantic import SecretStr
+
+import asyncio
 import os
-from dotenv import load_dotenv
-#load_dotenv()
+
+
+BROWSER = Browser(
+    config=BrowserConfig(
+        chrome_instance_path='C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+    )
+)
+
 
 async def main():
   api_key = os.getenv("GEMINI_API_KEY")
 
   prompt = f"""
-      go to https://www.calendardate.com/todays.htm, and tell me what day it is today and the timezone.
+      go to yahoo.com
       """
 
   # Initialize the model
@@ -24,26 +31,11 @@ async def main():
   # Create agent with the model
   agent = Agent(
       task = prompt,
-      llm = llm
+      llm = llm,
+      browser=BROWSER,
   )
 
   await agent.run()
 
-asyncio.run(main())
-
-
-# sample for openai
-# from langchain_openai import ChatOpenAI
-# from browser_use import Agent
-# import asyncio
-# from dotenv import load_dotenv
-# load_dotenv()
-
-# async def main():
-#     agent = Agent(
-#         task="",
-#         llm=ChatOpenAI(model="gpt-4o"),
-#     )
-#     await agent.run()
-
-# asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())

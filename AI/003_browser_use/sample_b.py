@@ -135,7 +135,7 @@ if __name__ == '__main__':
 #         return {"project_name": project_name}
 
 #     prompt = f"""
-#     1. Login to https://rc-sample.wktmdev.com/TeamMate using provided credentials: credentials_controller()
+#     1. Login to ... using provided credentials: credentials_controller()
 #     2. Verify successful login
 #     3. Search for project using provided name
 #     4. Open the project

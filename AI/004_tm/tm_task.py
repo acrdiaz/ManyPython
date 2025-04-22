@@ -25,7 +25,7 @@ async def main():
 
         # Define the prompt
         prompt = """
-            go to https://qa-tmplus.wktmdev.com/TeamMate, with credentials user: admin, pass: password
+            go to ..., with credentials user: admin, pass: password
             Open the "project section" using the main menu
             the project section will display the list of projects,
             Open the first project using the ribbon.
@@ -58,7 +58,7 @@ asyncio.run(main())
 
 
     # prompt = f"""
-    #   go to https://qa-tmplus.wktmdev.com/TeamMate, with credentials user: admin, pass: password
+    #   go to ..., with credentials user: admin, pass: password
     #   Open the "project section" using the main menu
     #   the project section will display the list of projects,
     #   click select the first project
