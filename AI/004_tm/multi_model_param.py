@@ -9,6 +9,7 @@ from browser_use.browser.browser import Browser, BrowserConfig, BrowserContextCo
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import ChatOpenAI
 from pydantic import SecretStr
+from utils import get_multiline_input
 
 # Initialize configuration
 BROWSER = Browser(
@@ -23,13 +24,16 @@ BROWSER = Browser(
         ),
     )
 )
-MAX_STEPS = 7
+MAX_STEPS = 30
 
 DB_CONTEXT = ContextListManager()
 
 API_KEY = SecretStr(os.getenv("GEMINI_API_KEY"))
 LLM_GEMINI = 'gemini-2.0-flash'
-LLM_GPT = 'gpt-4o-mini'
+LLM_GPT = 'gpt-4o-mini-search-preview-2025-03-11' # 'gpt-4o-mini'
+
+LLM_SELECTED = 'g'
+LLM_PLANNER_SELECTED = 'c'
 
 
 def get_model_instance(model_choice):
@@ -39,14 +43,14 @@ def get_model_instance(model_choice):
             model=LLM_GEMINI,
             api_key=API_KEY,
             # timeout=100,
-            temperature=0.1,
+            temperature=0.0,
             max_tokens=32000
         )
     elif model_choice == 'c':
         return ChatOpenAI(
             model=LLM_GPT,
             # timeout=100,
-            temperature=0.0,
+            # temperature=0.0,
         )
     return None
 
@@ -107,7 +111,7 @@ def llm_evaluate_user_prompt(prompt, llm):
     try:
         # AA1 Can this text be refactored to another file?
         prompt_llm = f"""
-You are an expert auditor using and auditing software.
+You are an expert user using dreveal this page: dreveal.com.
 List of dictionary keys: {DB_CONTEXT.get_all_keys_comma_separated()}.
 Match the most relevant key based on this prompt: "{prompt}".
 If no key matches the prompt, respond with 'None'.
@@ -185,7 +189,7 @@ async def run_agent(
     agent = Agent(
         task=prompt,
         message_context=combined_context,
-        # planner_llm=planner_llm,
+        planner_llm=planner_llm,
         # planner_interval=1,
         llm=llm,
         browser=BROWSER,
@@ -199,13 +203,13 @@ async def run_agent(
         # ],
         # use_vision=True,
         # use_vision_for_planner=True,
-        max_actions_per_step=3,                     # AA1 is this number arbitrary?
+        # max_actions_per_step=3,                     # AA1 is this number arbitrary?
         # validate_output=True,
         # max_input_tokens=64000,
         max_failures=2,                             # Increase max failures to allow for retries
-        # retry_delay=1,                            # Short delay between retries
+        retry_delay=3,                              # Short delay between retries
         # # enable_memory=True                      # Enable memory to remember failed attempts
-        tool_calling_method='function_calling'      # Add this line
+        # tool_calling_method='function_calling'      # Add this line
     )
 
     page_content = await agent.run(max_steps=MAX_STEPS)  # Increase max steps to allow for recovery, 3 steps
@@ -299,67 +303,100 @@ async def cleanup():
     except Exception as e:
         print(f"Cleanup warning: {e}")
 
-async def main():
-    while True:
-        print("\n=== AI Model Interface ===")
-        print("g. Gemini")
-        print("c. ChatGPT")
-        print("q. Quit")
-       
-        choice = input("Select model (g/c) or 'q' to quit: ").lower()
-       
-        if choice == 'q':
-            print("Goodbye!")
-            break
-           
-        if choice not in ['g', 'c']:
-            print("Invalid choice. Please select 'g' or 'c'.")
-            continue
-           
-        model_instance = get_model_instance(choice)
-        if not model_instance:
-            print("Error initializing the model. Please try again.")
-            continue
-       
-        model_planner = get_model_instance('g')  # Use Gemini (ChatGPT) for planning
-        if not model_planner:
-            print("Error initializing the model planner. Please try again.")
-            continue
- 
-        while True:  # Inner loop for multiple questions with same model
-            question = input("\nEnter your task/prompt (or 'b' to go back to model selection): ")
-           
-            if question.lower() == 'b':
-                break
+async def main(question=None):
 
+    """
+    # print("\n=== AI Model Interface ===")
+    # print("g. Gemini")
+    # print("c. ChatGPT")
+    # print("q. Quit")
+    
+    # choice = input("Select model (g/c) or 'q' to quit: ").lower()
+    
+    # if choice == 'q':
+    #     print("Goodbye!")
+    #     break
+        
+    # if choice not in ['g', 'c']:
+    #     print("Invalid choice. Please select 'g' or 'c'.")
+    #     continue
+        
+    #  model_instance = get_model_instance(choice)
+    """
+    model_instance = get_model_instance(LLM_SELECTED)
+    if not model_instance:
+        print("Error initializing the model. Please try again.")
+        # continue
+        return
+    
+    model_planner = get_model_instance(LLM_PLANNER_SELECTED)
+    if not model_planner:
+        print("Error initializing the model planner. Please try again.")
+        # continue
+        return
+
+    # D:\prj\github\ManyPython\\database.py
+    result = DB_CONTEXT.load_database(path='AI\\004_tm')
+    if not result:
+        print("Error loading database. Please check the file path and format.")
+        # continue
+        return
+
+    # once = True # AA1 delete
+    # while once:
+    # while True:
+        # once = False
+    
+    if question is None: # AA1 delete this
+        # while True:  # Inner loop for multiple questions with same model
+        if True:  # AA1 delete this line
+            question = get_multiline_input("Task Prompt", "Enter your task/prompt (or 'q' to quit):")
+           
+            if not question or question.lower() == 'q' or not question.strip():
+                return
+
+    if True: # AA1 delete this line
             max_retries = 300
             retry_count = 0
            
             try:
-                print("Processing your question...")
-                direct_answer = await get_llm_response(question, model_instance)
+                # AA1 commented this temp
+                # print("Processing your question...")
+                # direct_answer = await get_llm_response(question, model_instance)
                
-                if direct_answer:
-                    print("\nAnswer from LLM:", direct_answer)
-                    continue  # Allow next question
+                # if direct_answer:
+                #     print("\nAnswer from LLM:\n", direct_answer)
+                #     # continue  # Allow next question
+                #     return # AA1 temp code
                 
-                key = await process_user_prompt(question, model_instance)
+                # key = await process_user_prompt(question, model_instance)
 
-                print(f"\nKey: {key}")
+                # print(f"\n🟢 Key: {key}")
 
-                if key == 'None':
-                    print("\nThe task/prompt does not appear to belong to the Auditing domain.")
-                    print("Terminating the process...")
-                    exit(0)
+                # if key == 'None':
+                #     print("\nThe task/prompt does not appear to belong to the Auditing domain.")
+                #     print("Terminating the process...")
+                #     exit(0)
 
-                # exit(0) AA1 delete
-
-                additional_information = DB_CONTEXT.get_entry(key)
+                # additional_information = DB_CONTEXT.get_entry(key)
+                additional_information = """
+1. Customize_Dashboard
+1.1. Buttons are <div> elements, has attribute role="button"
+1.2. Use the menu option of the dashpoard to open customization panel
+1.3. To customize colors use the Color Scheme option panel
+1.4. To start editing a color, click on corresponding <div class="dx-dashboard-edit-color-icon" data-bind="click: editColor">
+     to display the colo picker
+2. Ensure all communication is precise not verbose
+                """
 
                 retry_count = 0
                 while True: # AA1 retry_count < max_retries: # infinite retry loop
                     try:
                         print("\nUsing browser to find answer...")
+
+                        print(f"\n🟢 prompt:\n{question}")
+                        print(f"\n🟢 additional_information:\n{additional_information}")
+
                         page_content = await run_agent(
                             prompt=question,
                             additional_information=additional_information,
@@ -385,7 +422,7 @@ async def main():
                                 else:
                                     additional_information = f"Try this navigation path: {assistance}"
                                 continue
-                           
+
                         if success and final_answer:
                             print("\n✅ Success!")
                             print("Answer:", final_answer)
@@ -414,8 +451,6 @@ async def main():
 
 if __name__ == "__main__":
     try:
-        DB_CONTEXT.load_database()
-
         asyncio.run(main())
 
         print('\n'.join([''] * 3))
@@ -424,19 +459,3 @@ if __name__ == "__main__":
         print("\nShutting down gracefully...")
     finally:
         print(f"Good bye.")
-
-"""
-* prompts LLM
-Capital of France
-
-* promtps Web
-how many flights from Bolivia to Paris
-Latest created airlines in France
-Key: None
-
-Login to ... --- Use credentials: admin/password
-
-question = "in the project '05 German' area add a Risk, under procedure"
-question = "After the site loads enter user the credentials: admin/admin"
-Key: Login
-"""

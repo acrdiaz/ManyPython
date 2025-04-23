@@ -1,0 +1,17 @@
+Open
+* Credentials is not required
+* Destination page title: dRevealS Enterprise
+---
+Home_File_Manager
+* Contains a list of Dashboards and Grids
+---
+Open_Dashboard
+* 'Double-click' (not a click) on the Dashboards folder to view all the Dashboard reports.
+---
+Open_Grid
+* On the file manager page, locate the Grid folder.
+* Double-click the Grid folder to view all the Grid reports.
+---
+Customize_Dashboard
+* Buttons are <div> elements, has attribute role="button"
+* If you need help, let me know what you see ,and suggest me to improve instructions

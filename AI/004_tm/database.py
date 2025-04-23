@@ -1,3 +1,6 @@
+import os
+
+
 class ContextListManager:
     def __init__(self):
         self.context = {}
@@ -25,28 +28,28 @@ class ContextListManager:
     def clear_entries(self):
         self.context.clear()
 
-    def load_database(self):
-        self.add_entry(
-            "Login",
-            None
-        )
-        self.add_entry(
-            "Homepage",
-            """* Title and tab name says: Home - TeamMate
-* Top left Hamburger Menu
-  contains a list of areas to navigate: 
-  * My Home
-  * Assessment
-  * Project
-  * TeamInisights Reports
-  * Setup
-            """
-        )
-        self.add_entry(
-            "Project_Area",
-            """* The url contains: /TeamMate/Project
-* Contains a 'tree grid'
-* can add objects to the tree grid
-* can add folders to the tree grid
-            """
-        )
+    def load_database(self, path, filename="context_entries.txt"):
+        """
+        Loads context entries from a text file.
+        Each entry should be separated by a line with only '---'.
+        The first line of each entry is the key, the rest is the value.
+        """
+        script_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        filepath = os.path.join(script_dir, path, filename)
+
+        self.clear_entries()
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                content = f.read()
+            entries = content.split("\n---\n")
+            for entry in entries:
+                lines = entry.strip().split("\n", 1)
+                if len(lines) == 2:
+                    key = lines[0].strip()
+                    value = lines[1].strip()
+                    self.add_entry(key, value)
+        except FileNotFoundError:
+            print(f"File {filepath} not found. No entries loaded.")
+            return False
+        
+        return True

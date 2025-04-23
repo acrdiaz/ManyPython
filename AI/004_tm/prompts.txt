@@ -1,0 +1,20 @@
+*
+Open https://dreveal.com
+Open the File Manager using the "Try it for Free" button
+-- Success
+-- Step 3
+-- Answer: I have opened https://dreveal.com and 
+successfully accessed the File Manager using the 
+"Try it for Free" button. 
+The File Manager shows two items: 
+Dashboards and Grids.
+*
+Confirm if you are seeing the file manager
+-- Success
+-- Step 1
+*
+1. Click on the menu option for 'Sales By Customer Education' to display the panel.
+2. From the panel, expand the Color Scheme area.
+3. Use the pencil icon with HTML class: dx-dashboard-edit-color-icon to start editing the 'Bachelors'.
+4. Set the color to yellow.
+-- 
