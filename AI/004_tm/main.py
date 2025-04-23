@@ -12,7 +12,8 @@ from pydantic import SecretStr
 # Initialize configuration
 BROWSER = Browser(
     config=BrowserConfig(
-        chrome_instance_path='C:\\Program Files (x86)\\Microsoft\\Edge\Application\\msedge.exe',
+        # chrome_instance_path='C:\\Program Files (x86)\\Microsoft\\Edge\Application\\msedge.exe',
+        chrome_instance_path='C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
     )
 )
 MAX_STEPS = 30
@@ -22,7 +23,7 @@ API_KEY = SecretStr(os.getenv("GEMINI_API_KEY"))
 LLM_GEMINI = 'gemini-2.0-flash'
 LLM_GPT = 'gpt-4o-mini'
 
-DEFAULT_MODEL = 'c'
+DEFAULT_MODEL = 'c' # 'g' for Gemini, 'c' for ChatGPT
 
 
 def get_model_instance(model_choice):
@@ -118,7 +119,7 @@ async def run_agent(
         max_failures=2,                             # Increase max failures to allow for retries
         # retry_delay=1,                            # Short delay between retries
         # # enable_memory=True                      # Enable memory to remember failed attempts
-        tool_calling_method='function_calling'      # Add this line
+        # tool_calling_method='function_calling'      # Add this line
     )
 
     page_content = await agent.run(max_steps=MAX_STEPS)  # Increase max steps to allow for recovery, 3 steps
@@ -268,7 +269,7 @@ def load_dr_prompt(user_action):
         case 'f':
             task = """
 1. Add tp the 'Corporate Accounting' object. a new object 'Control'.
-2. 'Control' with a custom title 'Demo B Control Wednesday'.
+2. 'Control' with a custom title 'Demo Noon Control Wednesday'.
             """
             additional_information = """
 1. No scrolling.
@@ -280,7 +281,7 @@ def load_dr_prompt(user_action):
         case 'g':
             task = """
 1. The 'Form view' is a set of Fields for one object.
-2. To the 'Notes' field type in this text: 'Note: This is a demo CONTROL created by AI. This text is inserted into athe HTML field by AI.'
+2. Under the 'Notes' title, the edit field add this text: 'Note: This is a demo CONTROL created by AI. This text is inserted into athe HTML field by AI.'
             """
             additional_information = """
 1. Next to The title, under the title is the text editor.
@@ -297,7 +298,7 @@ def load_dr_prompt(user_action):
     )
 
 async def main():
-    print("\n=== AI Select a dReveal Action ===")
+    print("\n=== AI Select a TM Action ===")
     print("a. Login to TeamMate")
     print("b. Add a custom widget")
     print("c. Add a custom widget -- resize to 100%")
@@ -330,7 +331,7 @@ async def main():
     prompt, additional_information = load_dr_prompt(user_action)
     
     print(f"\n🚀 Action:\n{prompt}")
-    print(f"\n🚀 Context:\n{additional_information}\n")
+    # print(f"\n🚀 Context:\n{additional_information}\n")
     input("Press Enter to begin...")
 
     page_content = await run_agent(

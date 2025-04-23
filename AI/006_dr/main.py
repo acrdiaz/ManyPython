@@ -12,7 +12,8 @@ from pydantic import SecretStr
 # Initialize configuration
 BROWSER = Browser(
     config=BrowserConfig(
-        chrome_instance_path='C:\\Program Files (x86)\\Microsoft\\Edge\Application\\msedge.exe',
+        # chrome_instance_path='C:\\Program Files (x86)\\Microsoft\\Edge\Application\\msedge.exe',
+        chrome_instance_path='C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
     )
 )
 MAX_STEPS = 30
@@ -22,7 +23,7 @@ API_KEY = SecretStr(os.getenv("GEMINI_API_KEY"))
 LLM_GEMINI = 'gemini-2.0-flash'
 LLM_GPT = 'gpt-4o-mini'
 
-DEFAULT_MODEL = 'c'
+DEFAULT_MODEL = 'g' # 'g' for Gemini, 'c' for ChatGPT
 
 
 def get_model_instance(model_choice):
@@ -118,7 +119,7 @@ async def run_agent(
         max_failures=2,                             # Increase max failures to allow for retries
         # retry_delay=1,                            # Short delay between retries
         # # enable_memory=True                      # Enable memory to remember failed attempts
-        tool_calling_method='function_calling'      # Add this line
+        # tool_calling_method='function_calling'      # Add this line ....
     )
 
     page_content = await agent.run(max_steps=MAX_STEPS)  # Increase max steps to allow for recovery, 3 steps
@@ -254,13 +255,13 @@ def load_dr_prompt(user_action):
         case 'e':
             task = """
 1. The dashboard: 'Select Chart Metric', has a cog menu, click on it to open the Options panel.
-2. Tell me what elements are in the panel
+2. Maximize the dashboard.
             """
 # 3. Perform a cusomization, Rotated is OFF, change it to ON, click the ON button.
             additional_information = """
 1. The dashboard header has buttons: Export, Maximize, Cog Menu.
-1. The Cog Menu is index: 21
-2. The Menu code is: <div role="button" class="dx-widget dx-button dx-button-mode-contained dx-button-normal" tabindex="0" title="Menu">
+2. The Cog Menu is index: 21
+3. The Menu code is: <div role="button" class="dx-widget dx-button dx-button-mode-contained dx-button-normal" tabindex="0" title="Menu">
             """
         case 'f':
             task = """
@@ -283,10 +284,10 @@ def load_dr_prompt(user_action):
 async def main():
     print("\n=== AI Select a dReveal Action ===")
     print("a. Open File manager")
-    print("b. Open Dashboards folder")
+    print("b. Open Dashboards folder -- under construction")
     print("c. Make a list of all available dashboards")
-    print("d. Sales Performance Analysis.dDashX")
-    print("e. Sales Performance Analysis.dDashX -- Custom")
+    print("d. Sales Performance Analysis.dDashX -- summorize dashboard content")
+    print("e. Sales Performance Analysis.dDashX -- Custom Dashview -- under construction")
     print("f. Sales Performance Analysis.dDashX -- Export to Excel")
     print("q. Quit\n")
     
@@ -313,7 +314,7 @@ async def main():
     prompt, additional_information = load_dr_prompt(user_action)
     
     print(f"\n🚀 Action:\n{prompt}")
-    print(f"\n🚀 Context:\n{additional_information}\n")
+    # print(f"\n🚀 Context:\n{additional_information}\n")
     input("Press Enter to begin...")
 
     page_content = await run_agent(
