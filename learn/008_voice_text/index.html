@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,10 +12,12 @@
             text-align: center;
             margin: 50px;
         }
+
         #startStopButton {
             padding: 10px 20px;
             font-size: 16px;
         }
+
         #result {
             margin-top: 20px;
             font-size: 18px;
@@ -27,6 +30,7 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Speech To Text</h1>
     <button id="startStopButton">Start Listening</button>
@@ -35,11 +39,7 @@
         const startStopButton = document.getElementById('startStopButton');
         const resultDiv = document.getElementById('result');
 
-        // const SpeechRecognition = window.SpeechRecongition || window.webkitSpeechRecognition;
-        // const SpeechRecognition = window.SpeechRecongition;
-        // const SpeechRecognition = window.webkitSpeechRecognition;
-        // const SpeechRecognition = webkitSpeechRecognition;
-        const SpeechRecognition = window.SpeechSynthesisVoice;
+        const SpeechRecognition = window.SpeechRecongition || window.webkitSpeechRecognition;
         const recognition = new SpeechRecognition();
         recognition.interimResults = true;
         recognition.continuous = true;
@@ -74,4 +74,5 @@
         })
     </script>
 </body>
+
 </html>
