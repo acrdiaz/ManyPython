@@ -1,23 +1,44 @@
-# run from \dr-ai-demos
-#   uvicorn browser_use.Web_v_1_0.main:app --reload
+# run from \ManyPython
+#   uvicorn AI.007_FastAPI.main:app --reload
 
 from fastapi import FastAPI
 from typing import List
-# from src.dr_web_automate import DRWebAutomate
+from .base.dr_web_auto import DRWebAuto
 
 app = FastAPI()
 
+LLM_GEMINI = 'gemini-2.0-flash'
+LLM_GPT = 'gpt-4o-mini'
+
+DEFAULT_MODEL = LLM_GEMINI
 
 @app.get("/")
 async def root():
     return {"message": "Welcome to the FastAPI application"}
 
-# @app.get("/")
-# async def Open_dReveal():
-#     browser = DRWebAutomate("Chrome")
-#     browser.open_url("http://localhost:8000/docs")
-#     browser.close_browser()
-#     return {"message": "Opening dReveal in the browser"}
+@app.get("/open")
+async def open_dr(prompt):
+    browser = DRWebAuto()
+    page_content = await browser.run_agent(
+        llm=DEFAULT_MODEL,
+        prompt=prompt,
+    )
+
+    if hasattr(page_content, 'history'):
+        last_result = page_content.history[-1].result[-1]
+        last_result_content = page_content.final_result()
+        
+        if page_content.is_done() and page_content.is_successful():
+            result = last_result_content
+        else:
+            # result = page_content.get_result()
+            # if not result:
+            #     result = "No result found"
+            # else:
+            #     result = f"Need help: {last_result.extracted_content}"
+            result = f"Need help: {last_result.extracted_content}"
+
+    return {"message": result}
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: str = None):

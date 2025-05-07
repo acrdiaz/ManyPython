@@ -117,7 +117,7 @@ async def run_agent(
         # validate_output=True,
         # max_input_tokens=64000,
         max_failures=2,                             # Increase max failures to allow for retries
-        # retry_delay=1,                            # Short delay between retries
+        retry_delay=3,                            # Short delay between retries
         # # enable_memory=True                      # Enable memory to remember failed attempts
         # tool_calling_method='function_calling'      # Add this line
     )
