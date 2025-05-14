@@ -1,50 +1,50 @@
 # run from \ManyPython
 #   uvicorn AI.007_FastAPI.main:app --reload
 
+import os
+
 from fastapi import FastAPI
 from typing import List
-from .base.dr_web_auto import DRWebAuto
+# from .base.dr_web_auto import DRWebAuto
 
+
+PROMPT_PATH = os.path.join(os.path.dirname(__file__), "prompt.txt")
 app = FastAPI()
 
-LLM_GEMINI = 'gemini-2.0-flash'
-LLM_GPT = 'gpt-4o-mini'
+def get_prompt_file_size():
+    try:
+        return os.path.getsize(PROMPT_PATH)
+    except FileNotFoundError:
+        print("prompt.txt file not found.")
+        return 0
 
-DEFAULT_MODEL = LLM_GEMINI
+def write_prompt_file(prompt: str):
+    try:
+        with open(PROMPT_PATH, "w") as file:
+            file.write(prompt)
+    except FileNotFoundError:
+        print("prompt.txt file not found.")
+    except Exception as e:
+        print(f"An error occurred while cleaning the prompt file: {e}")
 
 @app.get("/")
 async def root():
     return {"message": "Welcome to the FastAPI application"}
 
-@app.get("/open")
-async def open_dr(prompt):
-    browser = DRWebAuto()
-    page_content = await browser.run_agent(
-        llm=DEFAULT_MODEL,
-        prompt=prompt,
-    )
+@app.post("/prompt/")
+def create_prompt(prompt: str):
+    if get_prompt_file_size() == 0:
+        write_prompt_file(prompt)
+        return {"message": "Prompt created successfully!", "prompt": prompt}
+    else:
+        return {"message": "Try again later, a prompt is in queue."}
 
-    if hasattr(page_content, 'history'):
-        last_result = page_content.history[-1].result[-1]
-        last_result_content = page_content.final_result()
-        
-        if page_content.is_done() and page_content.is_successful():
-            result = last_result_content
-        else:
-            # result = page_content.get_result()
-            # if not result:
-            #     result = "No result found"
-            # else:
-            #     result = f"Need help: {last_result.extracted_content}"
-            result = f"Need help: {last_result.extracted_content}"
 
-    return {"message": result}
+# @app.get("/items/{item_id}")
+# def read_item(item_id: int, q: str = None):
+#     return {"item_id": item_id, "query": q}
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "query": q}
-
-# Define a POST endpoint
-@app.post("/items/")
-def create_item(items: List[dict]):
-    return {"message": "Items created successfully!", "items": items}
+# # Define a POST endpoint
+# @app.post("/items/")
+# def create_item(items: List[dict]):
+#     return {"message": "Items created successfully!", "items": items}
