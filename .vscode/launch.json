@@ -13,7 +13,7 @@
       "request": "launch",
       "module": "uvicorn",
       "args": [
-              "AI.007_FastAPI.main:app",
+              "AI.007_FastAPI.main_api:app",
               "--reload",
           ],
           "jinja": false,

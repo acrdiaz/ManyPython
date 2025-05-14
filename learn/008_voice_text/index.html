@@ -13,7 +13,8 @@
             margin: 50px;
         }
 
-        #startStopButton {
+        #startStopButton,
+        #sendMessageButton {
             padding: 10px 20px;
             font-size: 16px;
         }
@@ -34,10 +35,14 @@
 <body>
     <h1>Speech To Text</h1>
     <button id="startStopButton">Start Listening</button>
-    <div id="result"></div>
+    <button id="sendMessageButton">Send message</button>
+    <div id="result" contenteditable="true"></div>
+    <div id="response"></div>
     <script>
         const startStopButton = document.getElementById('startStopButton');
+        const sendMessageButton = document.getElementById('sendMessageButton');
         const resultDiv = document.getElementById('result');
+        const responseDiv = document.getElementById('response');
 
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         const recognition = new SpeechRecognition();
@@ -71,6 +76,29 @@
                 listening = true;
                 startStopButton.textContent = 'Stop Listening'
             }
+        })
+
+        sendMessageButton.addEventListener('click', () => {
+            const message = resultDiv.innerHTML;
+            const url = 'http://127.0.0.1:8000/prompt/?prompt=' + encodeURIComponent(message);
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt: message }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    responseDiv.innerHTML = data.message;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+
+            
         })
     </script>
 </body>
