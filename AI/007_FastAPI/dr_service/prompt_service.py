@@ -46,8 +46,8 @@ class PromptService:
         logger.info(f"Metadata: {metadata}")
         
         # Simulate processing time
-        time.sleep(10)
-        prompt = "open https://www.wikipedia.org/"
+        # time.sleep(10)
+        # prompt = "open https://www.wikipedia.org/"
         buService = DRBrowserUseService()
         asyncio.run(buService.main(prompt))
         
