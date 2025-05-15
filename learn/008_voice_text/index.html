@@ -44,39 +44,52 @@
         const resultDiv = document.getElementById('result');
         const responseDiv = document.getElementById('response');
 
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        const recognition = new SpeechRecognition();
-        recognition.interimResults = true;
-        recognition.continuous = true;
-        let listening = false;
-        recognition.onresult = (event) => {
-            let transcript = '';
-            for (let i = event.resultIndex; i < event.results.length; i++) {
-                transcript += event.results[i][0].transcript;
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            console.log("SpeechRecognition is supported in this browser.");
+            
+            recognition.interimResults = true;
+            recognition.continuous = true;
+            let listening = false;
+            recognition.onresult = (event) => {
+                let transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                }
+                resultDiv.innerHTML = transcript;
+            };
+
+            recognition.onerror = (event) => {
+                console.error("Speech recognition error", event)
             }
-            resultDiv.innerHTML = transcript;
-        };
 
-        recognition.onerror = (event) => {
-            console.error("Speech recognition error", event)
-        }
-
-        recognition.onend = () => {
-            listening = false;
-            startStopButton.textContent = 'Start Listening'
-        }
-
-        startStopButton.addEventListener('click', () => {
-            if (listening) {
-                recognition.stop();
+            recognition.onend = () => {
                 listening = false;
                 startStopButton.textContent = 'Start Listening'
-            } else {
-                recognition.start();
-                listening = true;
-                startStopButton.textContent = 'Stop Listening'
             }
-        })
+
+            startStopButton.addEventListener('click', () => {
+                if (listening) {
+                    recognition.stop();
+                    listening = false;
+                    startStopButton.textContent = 'Start Listening'
+                } else {
+                    recognition.start();
+                    listening = true;
+                    startStopButton.textContent = 'Stop Listening'
+                }
+            })
+
+        } else {
+            // disable button
+            startStopButton.textContent = 'Speech Recognition Not Supported';
+            startStopButton.style.backgroundColor = 'gray';
+            startStopButton.style.cursor = 'not-allowed';
+            startStopButton.style.pointerEvents = 'none';
+            console.error("SpeechRecognition is not supported in this browser.");
+            alert("Your browser does not support Speech Recognition. Please use Chrome, Edge, or Opera.");
+        }
 
         sendMessageButton.addEventListener('click', () => {
             const message = resultDiv.innerHTML;
@@ -96,9 +109,6 @@
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-
-
-            
         })
     </script>
 </body>
