@@ -45,10 +45,7 @@ class PromptService:
         logger.info(f"Processing prompt: {prompt[:50]}...")
         logger.info(f"Metadata: {metadata}")
         
-        # Simulate processing time
-        # time.sleep(10)
-        # prompt = "open https://www.wikipedia.org/"
-        buService = DRBrowserUseService()
+        buService = DRBrowserUseService(browser_name="edge")
         asyncio.run(buService.main(prompt))
         
         # Use metadata in the response if available
@@ -165,9 +162,7 @@ class PromptService:
         return self.results
 
 
-# Example usage
 if __name__ == "__main__":
-    # Create and start the service
     service = PromptService()
     service.start()
     
