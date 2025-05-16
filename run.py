@@ -2,11 +2,11 @@
 #   py run.py
 
 import uvicorn
-from app.services.dr_prompt_service import PromptService
+from app.services.dr_prompt_service import DRPromptService
 
 def main():
     # Start the background service if needed
-    service = PromptService()
+    service = DRPromptService()
     service.start()
     
     try:
