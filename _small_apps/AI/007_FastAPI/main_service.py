@@ -2,23 +2,22 @@ import os
 import time
 
 from dr_service.prompt_service import PromptService
+from dr_config.dr_config import DR_PROMPT_FILE_PATH
 
-
-PROMPT_PATH = os.path.join(os.path.dirname(__file__), "prompt.txt")
 
 def get_prompt_file_size():
     try:
-        return os.path.getsize(PROMPT_PATH)
+        return os.path.getsize(DR_PROMPT_FILE_PATH)
     except FileNotFoundError:
         print("prompt.txt file not found.")
         return 0
 
 def load_prompt_file():
     try:
-        if os.path.getsize(PROMPT_PATH) == 0:
+        if os.path.getsize(DR_PROMPT_FILE_PATH) == 0:
             return None
 
-        with open(PROMPT_PATH, "r") as file:
+        with open(DR_PROMPT_FILE_PATH, "r") as file:
             prompt = file.read().strip()
             if prompt:
                 return prompt
@@ -30,7 +29,7 @@ def load_prompt_file():
 
 def clean_prompt_file():
     try:
-        with open(PROMPT_PATH, "w") as file:
+        with open(DR_PROMPT_FILE_PATH, "w") as file:
             file.write("")
     except FileNotFoundError:
         print("prompt.txt file not found.")

@@ -1,28 +1,33 @@
 # run from \ManyPython
 #   uvicorn AI.007_FastAPI.main_api:app --reload
-# pip install fastapi-cors
 
 import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from typing import List
-# from .base.dr_web_auto import DRWebAuto
+from AI.007_FastAPI.dr_config.dr_config import DR_PROMPT_FILE_PATH
+# AI.007_FastAPI.dr_config
+
+print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+BASE_PATH = os.path.dirname(__file__)
+print(BASE_PATH)
+print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+
+# DR_PROMPT_FILE_PATH = os.path.join(BASE_PATH, "prompt.txt")
 
 
-PROMPT_PATH = os.path.join(os.path.dirname(__file__), "prompt.txt")
 app = FastAPI()
 
 def get_prompt_file_size():
     try:
-        return os.path.getsize(PROMPT_PATH)
+        return os.path.getsize(DR_PROMPT_FILE_PATH)
     except FileNotFoundError:
         print("prompt.txt file not found.")
         return 0
 
 def write_prompt_file(prompt: str):
     try:
-        with open(PROMPT_PATH, "w") as file:
+        with open(DR_PROMPT_FILE_PATH, "w") as file:
             file.write(prompt)
     except FileNotFoundError:
         print("prompt.txt file not found.")
