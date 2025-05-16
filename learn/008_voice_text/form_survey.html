@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Satisfaction Survey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .survey-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .rating-group {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+        .rating-option {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            min-height: 100px;
+        }
+        input[type="text"], 
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto 0;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .required {
+            color: red;
+        }
+        .rating-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 5px;
+        }
+        .rating-labels span:first-child {
+            text-align: left;
+        }
+        .rating-labels span:last-child {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <h1>Customer Satisfaction Survey</h1>
+        <p>Thank you for using our service. Please take a moment to provide your feedback to help us improve.</p>
+        
+        <form id="satisfactionForm" action="#" method="post">
+            <!-- Personal Information -->
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your name">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email: <span class="required">*</span></label>
+                <input type="email" id="email" name="email" placeholder="Your email address" required>
+            </div>
+            
+            <!-- Overall Satisfaction -->
+            <div class="form-group">
+                <label>Overall, how satisfied were you with our service? <span class="required">*</span></label>
+                <div class="rating-group">
+                    <div class="rating-option">
+                        <input type="radio" id="overall-1" name="overall_satisfaction" value="1" required>
+                        <label for="overall-1">1</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="overall-2" name="overall_satisfaction" value="2">
+                        <label for="overall-2">2</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="overall-3" name="overall_satisfaction" value="3">
+                        <label for="overall-3">3</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="overall-4" name="overall_satisfaction" value="4">
+                        <label for="overall-4">4</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="overall-5" name="overall_satisfaction" value="5">
+                        <label for="overall-5">5</label>
+                    </div>
+                </div>
+                <div class="rating-labels">
+                    <span>Very Dissatisfied</span>
+                    <span>Very Satisfied</span>
+                </div>
+            </div>
+            
+            <!-- Service Quality -->
+            <div class="form-group">
+                <label>How would you rate the quality of our service? <span class="required">*</span></label>
+                <div class="rating-group">
+                    <div class="rating-option">
+                        <input type="radio" id="quality-1" name="service_quality" value="1" required>
+                        <label for="quality-1">1</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="quality-2" name="service_quality" value="2">
+                        <label for="quality-2">2</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="quality-3" name="service_quality" value="3">
+                        <label for="quality-3">3</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="quality-4" name="service_quality" value="4">
+                        <label for="quality-4">4</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="quality-5" name="service_quality" value="5">
+                        <label for="quality-5">5</label>
+                    </div>
+                </div>
+                <div class="rating-labels">
+                    <span>Poor</span>
+                    <span>Excellent</span>
+                </div>
+            </div>
+            
+            <!-- Staff Friendliness -->
+            <div class="form-group">
+                <label>How would you rate the friendliness of our staff? <span class="required">*</span></label>
+                <div class="rating-group">
+                    <div class="rating-option">
+                        <input type="radio" id="staff-1" name="staff_friendliness" value="1" required>
+                        <label for="staff-1">1</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="staff-2" name="staff_friendliness" value="2">
+                        <label for="staff-2">2</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="staff-3" name="staff_friendliness" value="3">
+                        <label for="staff-3">3</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="staff-4" name="staff_friendliness" value="4">
+                        <label for="staff-4">4</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="staff-5" name="staff_friendliness" value="5">
+                        <label for="staff-5">5</label>
+                    </div>
+                </div>
+                <div class="rating-labels">
+                    <span>Not Friendly</span>
+                    <span>Very Friendly</span>
+                </div>
+            </div>
+            
+            <!-- Value for Money -->
+            <div class="form-group">
+                <label>How would you rate the value for money of our service? <span class="required">*</span></label>
+                <div class="rating-group">
+                    <div class="rating-option">
+                        <input type="radio" id="value-1" name="value_for_money" value="1" required>
+                        <label for="value-1">1</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="value-2" name="value_for_money" value="2">
+                        <label for="value-2">2</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="value-3" name="value_for_money" value="3">
+                        <label for="value-3">3</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="value-4" name="value_for_money" value="4">
+                        <label for="value-4">4</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="value-5" name="value_for_money" value="5">
+                        <label for="value-5">5</label>
+                    </div>
+                </div>
+                <div class="rating-labels">
+                    <span>Poor Value</span>
+                    <span>Excellent Value</span>
+                </div>
+            </div>
+            
+            <!-- Likelihood to Recommend -->
+            <div class="form-group">
+                <label>How likely are you to recommend our service to others? <span class="required">*</span></label>
+                <div class="rating-group">
+                    <div class="rating-option">
+                        <input type="radio" id="recommend-1" name="recommendation_likelihood" value="1" required>
+                        <label for="recommend-1">1</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="recommend-2" name="recommendation_likelihood" value="2">
+                        <label for="recommend-2">2</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="recommend-3" name="recommendation_likelihood" value="3">
+                        <label for="recommend-3">3</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="recommend-4" name="recommendation_likelihood" value="4">
+                        <label for="recommend-4">4</label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="recommend-5" name="recommendation_likelihood" value="5">
+                        <label for="recommend-5">5</label>
+                    </div>
+                </div>
+                <div class="rating-labels">
+                    <span>Not Likely</span>
+                    <span>Very Likely</span>
+                </div>
+            </div>
+            
+            <!-- Comments -->
+            <div class="form-group">
+                <label for="positive-comments">What did you like most about our service?</label>
+                <textarea id="positive-comments" name="positive_comments" placeholder="Please share what you enjoyed..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="improvement-comments">What could we improve?</label>
+                <textarea id="improvement-comments" name="improvement_comments" placeholder="Please share your suggestions for improvement..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="additional-comments">Any additional comments?</label>
+                <textarea id="additional-comments" name="additional_comments" placeholder="Any other feedback you'd like to share..."></textarea>
+            </div>
+            
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById('satisfactionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Thank you for your feedback!');
+            // In a real application, you would send this data to a server
+            this.reset();
+        });
+    </script>
+</body>
+</html>

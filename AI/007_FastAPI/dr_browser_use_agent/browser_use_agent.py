@@ -18,7 +18,7 @@ LLM_GPT = 'gpt-4o-mini'
 DEFAULT_MODEL = LLM_GEMINI
 
 
-class DRBrowserUseService:
+class DRBrowserUseAgent:
     def __init__(self, browser_name: str) -> None:
         """Initialize the browser use service.
 
@@ -80,5 +80,5 @@ class DRBrowserUseService:
 
 if __name__ == "__main__":
     prompt = "open https://espanol.yahoo.com/"
-    buService = DRBrowserUseService("edge")
+    buService = DRBrowserUseAgent("edge")
     asyncio.run(buService.main(prompt))

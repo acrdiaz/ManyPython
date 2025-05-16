@@ -1,16 +1,10 @@
 import asyncio
 import logging
-import os
 import queue
 import threading
 import time
-import sys
 
-# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from dr_browser_use.browser_use_service import DRBrowserUseService
-# from dr_browser_use.dr_browser_use_service import DRBrowserUseService
-# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-# from dr_browser_use.dr_browser_use_service import DRBrowserUseService
+from dr_browser_use_agent.browser_use_agent import DRBrowserUseAgent
 from typing import Dict, Any, Optional, List, Callable
 
 # Configure logging
@@ -45,8 +39,8 @@ class PromptService:
         logger.info(f"Processing prompt: {prompt[:50]}...")
         logger.info(f"Metadata: {metadata}")
         
-        buService = DRBrowserUseService(browser_name="edge")
-        asyncio.run(buService.main(prompt))
+        browserAgent = DRBrowserUseAgent(browser_name="edge")
+        asyncio.run(browserAgent.main(prompt))
         
         # Use metadata in the response if available
         priority = metadata.get('priority', 'normal')
