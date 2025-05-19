@@ -1,5 +1,5 @@
-from typing import Dict, Any, Optional, List, Callable
 from app.services.dr_browser_agent import DRBrowserUseAgent
+from typing import Dict, Any, Optional, List, Callable
 
 import asyncio
 import logging
@@ -19,7 +19,11 @@ class DRPromptService:
     """
     A service that runs in the background and processes a queue of prompts.
     """
-    
+    # Constants for configuration
+    STATUS_LOG_INTERVAL = 10  # seconds
+    QUEUE_TIMEOUT = 1.0  # seconds
+    THREAD_JOIN_TIMEOUT = 5.0  # seconds
+
     def __init__(self, processor_func: Callable[[str, Dict[str, Any]], Any] = None):
         """
         Initialize the prompt service.
@@ -34,22 +38,22 @@ class DRPromptService:
         self.results = {}  # Store results by prompt_id
         self.processor = processor_func or self._default_processor
         logger.info("DRPromptService initialized")
-    
+
     def _default_processor(self, prompt: str, metadata: Dict[str, Any]) -> str:
         """Default prompt processor that just logs the prompt."""
         logger.info(f"Processing prompt: {prompt[:50]}...")
         logger.info(f"Metadata: {metadata}")
-        
+
         # Using DRBrowserUseAgent from the separate file
         browserAgent = DRBrowserUseAgent(browser_name="edge")
         asyncio.run(browserAgent.main(prompt, metadata))
-        
+
         # Use metadata in the response if available
         priority = metadata.get('priority', 'normal')
         source = metadata.get('source', 'unknown')
-        
+
         return f"Processed: {prompt[:50]}... (Priority: {priority}, Source: {source})"
-    
+
     async def _run_browser_agent(self, agent):
         """Run the browser agent and close the browser when done."""
         try:
@@ -60,40 +64,58 @@ class DRPromptService:
     def _worker(self):
         """Worker thread that processes prompts from the queue."""
         logger.info("Worker thread started")
+        last_status_time = 0
+        
         while self.running:
+            # Log status every minute
+            current_time = time.time()
+            if current_time - last_status_time > self.STATUS_LOG_INTERVAL:
+                logger.info(f"Service status: Queue size = {self.queue.qsize()}")
+                last_status_time = current_time
+                
             try:
-                # Get a prompt from the queue with a timeout
-                prompt_id, prompt_text, metadata = self.queue.get(timeout=1.0)
-                logger.info(f"Processing prompt ID: {prompt_id}")
-                
-                try:
-                    # Process the prompt
-                    result = self.processor(prompt_text, metadata)
-                    status = "completed"
-                except Exception as e:
-                    logger.error(f"Error processing prompt {prompt_id}: {str(e)}")
-                    result = str(e)
-                    status = "error"
-                
-                # Store the result
-                self.results[prompt_id] = {
-                    "status": status,
-                    "result": result,
-                    "completed_at": time.time(),
-                    "prompt": prompt_text,
-                    "metadata": metadata
-                }
-                
-                # Mark the task as done
-                self.queue.task_done()
-                
-            except queue.Empty:
-                # Queue is empty, continue waiting
-                pass
+                # Process next prompt from queue (if available)
+                self._process_next_prompt()
             except Exception as e:
                 logger.error(f"Unexpected error in worker thread: {str(e)}")
         
-        logger.info("Worker thread stopped")    
+        logger.info("Worker thread stopped")
+        
+    def _process_next_prompt(self):
+        """Process the next prompt from the queue."""
+        try:
+            # Get a prompt from the queue with a timeout
+            prompt_id, prompt_text, metadata = self.queue.get(timeout=self.QUEUE_TIMEOUT)
+            logger.info(f"Processing prompt ID: {prompt_id}")
+            
+            # Process the prompt and update result
+            self._process_prompt_and_update_result(prompt_id, prompt_text, metadata)
+            
+            # Mark the task as done
+            self.queue.task_done()
+        except queue.Empty:
+            # Queue is empty, continue waiting
+            pass
+            
+    def _process_prompt_and_update_result(self, prompt_id, prompt_text, metadata):
+        """Process a prompt and update its result."""
+        try:
+            # Process the prompt
+            result = self.processor(prompt_text, metadata)
+            status = "completed"
+        except Exception as e:
+            logger.error(f"Error processing prompt {prompt_id}: {str(e)}")
+            result = str(e)
+            status = "error"
+        
+        # Store the result
+        self.results[prompt_id] = {
+            "status": status,
+            "result": result,
+            "completed_at": time.time(),
+            "prompt": prompt_text,
+            "metadata": metadata
+        }
 
     def start(self):
         """Start the service."""
@@ -115,7 +137,7 @@ class DRPromptService:
         logger.info("Stopping service...")
         self.running = False
         if self.worker_thread:
-            self.worker_thread.join(timeout=5.0)
+            self.worker_thread.join(timeout=self.THREAD_JOIN_TIMEOUT)
         logger.info("Service stopped")
 
     def add_prompt(self, prompt_text: str, metadata: Dict[str, Any] = None) -> str:
@@ -129,6 +151,8 @@ class DRPromptService:
         Returns:
             prompt_id: A unique ID for the prompt
         """
+        metadata = metadata or {}
+
         if not self.running:
             raise RuntimeError("Service is not running")
         
@@ -137,10 +161,10 @@ class DRPromptService:
             "status": "queued",
             "queued_at": time.time(),
             "prompt": prompt_text,
-            "metadata": metadata or {}
+            "metadata": metadata
         }
         
-        self.queue.put((prompt_id, prompt_text, metadata or {}))
+        self.queue.put((prompt_id, prompt_text, metadata))
         logger.info(f"Added prompt to queue with ID: {prompt_id}")
         return prompt_id
 
