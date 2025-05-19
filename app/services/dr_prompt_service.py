@@ -1,4 +1,9 @@
 from app.services.dr_browser_agent import DRBrowserUseAgent
+from app.utils.dr_globals import (
+    DR_STATUS_LOG_INTERVAL,
+    DR_QUEUE_TIMEOUT, 
+    DR_THREAD_JOIN_TIMEOUT
+)
 from typing import Dict, Any, Optional, List, Callable
 
 import asyncio
@@ -15,15 +20,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger('PromptService')
 
+
 class DRPromptService:
     """
     A service that runs in the background and processes a queue of prompts.
     """
-    # Constants for configuration
-    STATUS_LOG_INTERVAL = 10  # seconds
-    QUEUE_TIMEOUT = 1.0  # seconds
-    THREAD_JOIN_TIMEOUT = 5.0  # seconds
-
     def __init__(self, processor_func: Callable[[str, Dict[str, Any]], Any] = None):
         """
         Initialize the prompt service.
@@ -37,6 +38,7 @@ class DRPromptService:
         self.worker_thread = None
         self.results = {}  # Store results by prompt_id
         self.processor = processor_func or self._default_processor
+        # self._status_thread = None
         logger.info("DRPromptService initialized")
 
     def _default_processor(self, prompt: str, metadata: Dict[str, Any]) -> str:
@@ -61,31 +63,11 @@ class DRPromptService:
         finally:
             await agent.browser.close()
 
-    def _worker(self):
-        """Worker thread that processes prompts from the queue."""
-        logger.info("Worker thread started")
-        last_status_time = 0
-        
-        while self.running:
-            # Log status every minute
-            current_time = time.time()
-            if current_time - last_status_time > self.STATUS_LOG_INTERVAL:
-                logger.info(f"Service status: Queue size = {self.queue.qsize()}")
-                last_status_time = current_time
-                
-            try:
-                # Process next prompt from queue (if available)
-                self._process_next_prompt()
-            except Exception as e:
-                logger.error(f"Unexpected error in worker thread: {str(e)}")
-        
-        logger.info("Worker thread stopped")
-        
     def _process_next_prompt(self):
         """Process the next prompt from the queue."""
         try:
             # Get a prompt from the queue with a timeout
-            prompt_id, prompt_text, metadata = self.queue.get(timeout=self.QUEUE_TIMEOUT)
+            prompt_id, prompt_text, metadata = self.queue.get(timeout=DR_QUEUE_TIMEOUT)
             logger.info(f"Processing prompt ID: {prompt_id}")
             
             # Process the prompt and update result
@@ -96,7 +78,7 @@ class DRPromptService:
         except queue.Empty:
             # Queue is empty, continue waiting
             pass
-            
+
     def _process_prompt_and_update_result(self, prompt_id, prompt_text, metadata):
         """Process a prompt and update its result."""
         try:
@@ -117,6 +99,31 @@ class DRPromptService:
             "metadata": metadata
         }
 
+    def _worker(self):
+        """Worker thread that processes prompts from the queue."""
+        logger.info("Worker thread started")
+        last_status_time = 0
+        
+        while self.running:
+            # # Log status
+            # current_time = time.time()
+            # if current_time - last_status_time > DR_STATUS_LOG_INTERVAL:
+            #     logger.info(f"Service status: Queue size = {self.queue.qsize()}")
+            #     last_status_time = current_time
+
+            try:
+                # Process next prompt from queue (if available)
+                self._process_next_prompt()
+            except Exception as e:
+                logger.error(f"Unexpected error in worker thread: {str(e)}")
+        
+        logger.info("Worker thread stopped")
+
+    # def _status_loop(self): AA1 i probably do not need this
+    #     while self.running:
+    #         time.sleep(DR_STATUS_LOG_INTERVAL)
+    #         logger.info(f"Status Service status: Queue size = {self.queue.qsize()}")
+
     def start(self):
         """Start the service."""
         if self.running:
@@ -126,6 +133,8 @@ class DRPromptService:
         self.running = True
         self.worker_thread = threading.Thread(target=self._worker, daemon=True)
         self.worker_thread.start()
+        # self._status_thread = threading.Thread(target=self._status_loop, daemon=True) AA1 i probably do not need this
+        # self._status_thread.start()
         logger.info("Service started")
 
     def stop(self):
@@ -137,7 +146,9 @@ class DRPromptService:
         logger.info("Stopping service...")
         self.running = False
         if self.worker_thread:
-            self.worker_thread.join(timeout=self.THREAD_JOIN_TIMEOUT)
+            self.worker_thread.join(timeout=DR_THREAD_JOIN_TIMEOUT)
+        # if self._status_thread:
+        #     self._status_thread.join(timeout=DR_THREAD_JOIN_TIMEOUT)
         logger.info("Service stopped")
 
     def add_prompt(self, prompt_text: str, metadata: Dict[str, Any] = None) -> str:
@@ -187,36 +198,3 @@ class DRPromptService:
     def get_all_statuses(self) -> Dict[str, Dict[str, Any]]:
         """Get the status of all prompts."""
         return self.results
-
-
-if __name__ == "__main__":
-    service = DRPromptService()
-    service.start()
-    
-    try:
-        # Add some prompts to the queue
-        prompt_ids = []
-        for i in range(5):
-            prompt_id = service.add_prompt(
-                f"This is test prompt #{i}",
-                {"priority": i, "source": "test"}
-            )
-            prompt_ids.append(prompt_id)
-        
-        # Wait for processing and check statuses
-        time.sleep(1)
-        print(f"Queue size: {service.get_queue_size()}")
-        
-        # Wait for all prompts to be processed
-        time.sleep(10)
-        
-        # Print results
-        for prompt_id in prompt_ids:
-            status = service.get_status(prompt_id)
-            print(f"Prompt {prompt_id}: {status['status']}")
-            if status['status'] == 'completed':
-                print(f"  Result: {status['result']}")
-        
-    finally:
-        # Stop the service
-        service.stop()
