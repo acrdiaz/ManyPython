@@ -1,0 +1,34 @@
+import threading
+import logging
+
+
+logger = logging.getLogger('PromptService')
+
+class DRPromptProducer(threading.Thread):
+    def __init__(self, queue, prompt_file):
+        super().__init__()
+        self.queue = queue
+        self.promptFile = prompt_file
+        self._stop_event = threading.Event()
+
+    def stop(self):
+        self._stop_event.set()
+
+    def run(self):
+        while not self._stop_event.is_set():
+            try:
+                if self.promptFile.dr_utils_get_prompt_file_size() == 0:
+                    continue
+
+                prompt_text = self.promptFile.dr_utils_load_prompt_file()
+                if not prompt_text.strip():
+                    continue
+
+                logger.info(f"Loaded prompt: {prompt_text}")
+                self.promptFile.dr_utils_clean_prompt_file()
+                
+                metadata = {'priority': 'Normal'}
+                self.queue.put((prompt_text, metadata))
+                
+            except Exception as e:
+                logger.error(f"Error in producer thread: {str(e)}")

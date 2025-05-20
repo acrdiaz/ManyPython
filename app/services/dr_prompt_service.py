@@ -1,9 +1,14 @@
 from app.services.dr_browser_agent import DRBrowserUseAgent
+from app.services.dr_prompt_consumer import DRPromptConsumer
+from app.services.dr_prompt_producer import DRPromptProducer
 from app.utils.dr_globals import (
+    DR_POLLING_INTERVAL,
     DR_STATUS_LOG_INTERVAL,
     DR_QUEUE_TIMEOUT, 
     DR_THREAD_JOIN_TIMEOUT
 )
+from app.utils.dr_utils_file import DRUtilsFile
+from queue import Queue
 from typing import Dict, Any, Optional, List, Callable
 
 import asyncio
@@ -33,12 +38,18 @@ class DRPromptService:
             processor_func: Function to process prompts. Should accept (prompt_text, metadata)
                            If None, a default processor that just logs the prompt will be used.
         """
-        self.queue = queue.Queue()
+        self.queue = Queue()
         self.running = False
         self.worker_thread = None
         self.results = {}  # Store results by prompt_id
         self.processor = processor_func or self._default_processor
         # self._status_thread = None
+
+        self.promptFile = DRUtilsFile()
+        self.prompt_queue = Queue()
+        self.producer = DRPromptProducer(self.prompt_queue, self.promptFile)
+        self.consumer = DRPromptConsumer(self.prompt_queue, self)
+
         logger.info("DRPromptService initialized")
 
     def _default_processor(self, prompt: str, metadata: Dict[str, Any]) -> str:
@@ -47,7 +58,7 @@ class DRPromptService:
         logger.info(f"Metadata: {metadata}")
 
         # Using DRBrowserUseAgent from the separate file
-        browserAgent = DRBrowserUseAgent(browser_name="edge")
+        browserAgent = DRBrowserUseAgent(browser_name="edge") # AA1 global
         asyncio.run(browserAgent.main(prompt, metadata))
 
         # Use metadata in the response if available
@@ -99,31 +110,6 @@ class DRPromptService:
             "metadata": metadata
         }
 
-    def _worker(self):
-        """Worker thread that processes prompts from the queue."""
-        logger.info("Worker thread started")
-        last_status_time = 0
-        
-        while self.running:
-            # # Log status
-            # current_time = time.time()
-            # if current_time - last_status_time > DR_STATUS_LOG_INTERVAL:
-            #     logger.info(f"Service status: Queue size = {self.queue.qsize()}")
-            #     last_status_time = current_time
-
-            try:
-                # Process next prompt from queue (if available)
-                self._process_next_prompt()
-            except Exception as e:
-                logger.error(f"Unexpected error in worker thread: {str(e)}")
-        
-        logger.info("Worker thread stopped")
-
-    # def _status_loop(self): AA1 i probably do not need this
-    #     while self.running:
-    #         time.sleep(DR_STATUS_LOG_INTERVAL)
-    #         logger.info(f"Status Service status: Queue size = {self.queue.qsize()}")
-
     def start(self):
         """Start the service."""
         if self.running:
@@ -131,10 +117,12 @@ class DRPromptService:
             return
         
         self.running = True
-        self.worker_thread = threading.Thread(target=self._worker, daemon=True)
-        self.worker_thread.start()
+        # self.worker_thread = threading.Thread(target=self._worker, daemon=True)
+        # self.worker_thread.start()
         # self._status_thread = threading.Thread(target=self._status_loop, daemon=True) AA1 i probably do not need this
         # self._status_thread.start()
+        self.producer.start()
+        self.consumer.start()
         logger.info("Service started")
 
     def stop(self):
@@ -145,10 +133,14 @@ class DRPromptService:
         
         logger.info("Stopping service...")
         self.running = False
-        if self.worker_thread:
-            self.worker_thread.join(timeout=DR_THREAD_JOIN_TIMEOUT)
+        # if self.worker_thread:
+        #     self.worker_thread.join(timeout=DR_THREAD_JOIN_TIMEOUT)
         # if self._status_thread:
         #     self._status_thread.join(timeout=DR_THREAD_JOIN_TIMEOUT)
+        self.producer.stop()
+        self.consumer.stop()
+        self.producer.join(timeout=DR_THREAD_JOIN_TIMEOUT) # AA1 is this OK?
+        self.consumer.join(timeout=DR_THREAD_JOIN_TIMEOUT)
         logger.info("Service stopped")
 
     def add_prompt(self, prompt_text: str, metadata: Dict[str, Any] = None) -> str:
