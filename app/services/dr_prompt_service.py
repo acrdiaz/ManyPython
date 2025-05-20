@@ -38,15 +38,12 @@ class DRPromptService:
             processor_func: Function to process prompts. Should accept (prompt_text, metadata)
                            If None, a default processor that just logs the prompt will be used.
         """
-        self.queue = Queue()
         self.running = False
-        self.worker_thread = None
         self.results = {}  # Store results by prompt_id
         self.processor = processor_func or self._default_processor
-        # self._status_thread = None
 
         self.promptFile = DRUtilsFile()
-        self.prompt_queue = Queue()
+        self.prompt_queue = Queue()  # Single queue for all prompt processing
         self.producer = DRPromptProducer(self.prompt_queue, self.promptFile)
         self.consumer = DRPromptConsumer(self.prompt_queue, self)
 
@@ -73,22 +70,6 @@ class DRPromptService:
             await agent.run()
         finally:
             await agent.browser.close()
-
-    def _process_next_prompt(self):
-        """Process the next prompt from the queue."""
-        try:
-            # Get a prompt from the queue with a timeout
-            prompt_id, prompt_text, metadata = self.queue.get(timeout=DR_QUEUE_TIMEOUT)
-            logger.info(f"Processing prompt ID: {prompt_id}")
-            
-            # Process the prompt and update result
-            self._process_prompt_and_update_result(prompt_id, prompt_text, metadata)
-            
-            # Mark the task as done
-            self.queue.task_done()
-        except queue.Empty:
-            # Queue is empty, continue waiting
-            pass
 
     def _process_prompt_and_update_result(self, prompt_id, prompt_text, metadata):
         """Process a prompt and update its result."""
@@ -117,10 +98,6 @@ class DRPromptService:
             return
         
         self.running = True
-        # self.worker_thread = threading.Thread(target=self._worker, daemon=True)
-        # self.worker_thread.start()
-        # self._status_thread = threading.Thread(target=self._status_loop, daemon=True) AA1 i probably do not need this
-        # self._status_thread.start()
         self.producer.start()
         self.consumer.start()
         logger.info("Service started")
@@ -133,13 +110,9 @@ class DRPromptService:
         
         logger.info("Stopping service...")
         self.running = False
-        # if self.worker_thread:
-        #     self.worker_thread.join(timeout=DR_THREAD_JOIN_TIMEOUT)
-        # if self._status_thread:
-        #     self._status_thread.join(timeout=DR_THREAD_JOIN_TIMEOUT)
         self.producer.stop()
         self.consumer.stop()
-        self.producer.join(timeout=DR_THREAD_JOIN_TIMEOUT) # AA1 is this OK?
+        self.producer.join(timeout=DR_THREAD_JOIN_TIMEOUT)
         self.consumer.join(timeout=DR_THREAD_JOIN_TIMEOUT)
         logger.info("Service stopped")
 
@@ -167,7 +140,8 @@ class DRPromptService:
             "metadata": metadata
         }
         
-        self.queue.put((prompt_id, prompt_text, metadata))
+        # Add to the single prompt queue instead of self.queue
+        self.prompt_queue.put((prompt_id, prompt_text, metadata))
         logger.info(f"Added prompt to queue with ID: {prompt_id}")
         return prompt_id
 
@@ -185,7 +159,7 @@ class DRPromptService:
 
     def get_queue_size(self) -> int:
         """Get the current size of the queue."""
-        return self.queue.qsize()
+        return self.prompt_queue.qsize()
 
     def get_all_statuses(self) -> Dict[str, Dict[str, Any]]:
         """Get the status of all prompts."""
