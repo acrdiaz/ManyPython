@@ -6,7 +6,7 @@ class DRUtilsFile:
         return 100
 
     def dr_utils_load_prompt_file(self):
-        return "Sample prompt text"
+        return "Sample prompt text >>>>>>"
 
     def dr_utils_clean_prompt_file(self):
         pass

@@ -116,35 +116,6 @@ class DRPromptService:
         self.consumer.join(timeout=DR_THREAD_JOIN_TIMEOUT)
         logger.info("Service stopped")
 
-    def add_prompt(self, prompt_text: str, metadata: Dict[str, Any] = None) -> str:
-        """
-        Add a prompt to the queue.
-        
-        Args:
-            prompt_text: The prompt text to process
-            metadata: Additional metadata for the prompt
-            
-        Returns:
-            prompt_id: A unique ID for the prompt
-        """
-        metadata = metadata or {}
-
-        if not self.running:
-            raise RuntimeError("Service is not running")
-        
-        prompt_id = f"prompt_{int(time.time() * 1000)}"
-        self.results[prompt_id] = {
-            "status": "queued",
-            "queued_at": time.time(),
-            "prompt": prompt_text,
-            "metadata": metadata
-        }
-        
-        # Add to the single prompt queue instead of self.queue
-        self.prompt_queue.put((prompt_id, prompt_text, metadata))
-        logger.info(f"Added prompt to queue with ID: {prompt_id}")
-        return prompt_id
-
     def get_status(self, prompt_id: str) -> Optional[Dict[str, Any]]:
         """
         Get the status of a prompt.

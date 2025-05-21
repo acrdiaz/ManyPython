@@ -1,5 +1,6 @@
 import threading
 import logging
+import time
 
 
 logger = logging.getLogger('PromptService')
@@ -28,7 +29,9 @@ class DRPromptProducer(threading.Thread):
                 self.promptFile.dr_utils_clean_prompt_file()
                 
                 metadata = {'priority': 'Normal'}
-                self.queue.put((prompt_text, metadata))
+                prompt_id = f"prompt_{int(time.time() * 1000)}"
+
+                self.queue.put((prompt_id, prompt_text, metadata))
                 
             except Exception as e:
                 logger.error(f"Error in producer thread: {str(e)}")

@@ -19,9 +19,7 @@ class DRPromptConsumer(threading.Thread):
     def run(self):
         while not self._stop_event.is_set():
             try:
-                prompt_text, metadata = self.queue.get(timeout=DR_QUEUE_TIMEOUT)
-                self.service.add_prompt(prompt_text, metadata)
-                self.service._process_next_prompt()
+                prompt_id, prompt_text, metadata = self.queue.get(timeout=DR_QUEUE_TIMEOUT)
                 self.queue.task_done()
             except Exception as e:
                 logger.error(f"Error in consumer thread: {str(e)}")
