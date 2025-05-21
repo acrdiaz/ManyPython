@@ -7,6 +7,7 @@ from app.utils.dr_globals import (
     DR_QUEUE_TIMEOUT, 
     DR_THREAD_JOIN_TIMEOUT
 )
+from app.utils.dr_globals import DR_PROMPT_FILE_PATH
 from app.utils.dr_utils_file import DRUtilsFile
 from queue import Queue
 from typing import Dict, Any, Optional, List, Callable
@@ -42,7 +43,8 @@ class DRPromptService:
         self.results = {}  # Store results by prompt_id
         self.processor = processor_func or self._default_processor
 
-        self.promptFile = DRUtilsFile()
+        self.promptFile = DRUtilsFile(DR_PROMPT_FILE_PATH)
+
         self.prompt_queue = Queue()  # Single queue for all prompt processing
         self.producer = DRPromptProducer(self.prompt_queue, self.promptFile)
         self.consumer = DRPromptConsumer(self.prompt_queue, self)

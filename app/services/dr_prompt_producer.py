@@ -2,6 +2,8 @@ import threading
 import logging
 import time
 
+from app.utils.dr_globals import DR_POLLING_INTERVAL
+
 
 logger = logging.getLogger('PromptService')
 
@@ -33,5 +35,8 @@ class DRPromptProducer(threading.Thread):
 
                 self.queue.put((prompt_id, prompt_text, metadata))
                 
+                # Small delay to prevent CPU hogging
+                time.sleep(DR_POLLING_INTERVAL)
+
             except Exception as e:
                 logger.error(f"Error in producer thread: {str(e)}")
