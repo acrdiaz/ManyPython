@@ -1,4 +1,4 @@
-from app.utils.dr_globals import DR_API
+from app.core.dr_globals import DR_API
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

@@ -1,13 +1,10 @@
 from app.services.dr_browser_agent import DRBrowserUseAgent
 from app.services.dr_prompt_consumer import DRPromptConsumer
 from app.services.dr_prompt_producer import DRPromptProducer
-from app.utils.dr_globals import (
-    DR_POLLING_INTERVAL,
-    DR_STATUS_LOG_INTERVAL,
-    DR_QUEUE_TIMEOUT, 
+from app.core.dr_globals import (
+    DR_PROMPT_FILE_PATH,
     DR_THREAD_JOIN_TIMEOUT
 )
-from app.utils.dr_globals import DR_PROMPT_FILE_PATH
 from app.utils.dr_utils_file import DRUtilsFile
 from queue import Queue
 from typing import Dict, Any, Optional, List, Callable
@@ -114,8 +111,8 @@ class DRPromptService:
         self.running = False
         self.producer.stop()
         self.consumer.stop()
-        self.producer.join(timeout=DR_THREAD_JOIN_TIMEOUT)
-        self.consumer.join(timeout=DR_THREAD_JOIN_TIMEOUT)
+        # self.producer.join() # AA1 timeout=DR_THREAD_JOIN_TIMEOUT
+        # self.consumer.join()
         logger.info("Service stopped")
 
     def get_status(self, prompt_id: str) -> Optional[Dict[str, Any]]:
