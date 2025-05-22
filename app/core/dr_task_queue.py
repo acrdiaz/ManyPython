@@ -1,6 +1,6 @@
 import queue
 
-class TaskQueue:
+class DRTaskQueue:
     def __init__(self):
         self.queue = queue.Queue()
     
@@ -15,3 +15,6 @@ class TaskQueue:
     
     def empty(self):
         return self.queue.empty()
+    
+    def get_queue_size(self):
+        return self.queue.qsize()

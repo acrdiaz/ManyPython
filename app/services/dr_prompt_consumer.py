@@ -1,9 +1,10 @@
+from app.core.dr_globals import DR_POLLING_INTERVAL
+from app.core.dr_task_queue import DRTaskQueue
+
 import threading
 import logging
-import queue
 import time
 
-from app.core.dr_globals import DR_POLLING_INTERVAL
 
 
 logger = logging.getLogger('PromptService')
@@ -29,8 +30,6 @@ class DRPromptConsumer(threading.Thread):
 
                 # Small delay to prevent CPU hogging
                 time.sleep(DR_POLLING_INTERVAL)
-
-                print("consumer...........")
                 
             except Exception as e:
                 logger.error(f"Error in consumer thread: {str(e)}")

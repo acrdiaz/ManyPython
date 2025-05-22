@@ -1,17 +1,16 @@
 from app.services.dr_browser_agent import DRBrowserUseAgent
 from app.services.dr_prompt_consumer import DRPromptConsumer
 from app.services.dr_prompt_producer import DRPromptProducer
+from app.core.dr_task_queue import DRTaskQueue
 from app.core.dr_globals import (
     DR_PROMPT_FILE_PATH,
     DR_THREAD_JOIN_TIMEOUT
 )
 from app.utils.dr_utils_file import DRUtilsFile
-from queue import Queue
 from typing import Dict, Any, Optional, List, Callable
 
 import asyncio
 import logging
-import queue
 import threading
 import time
 
@@ -42,7 +41,7 @@ class DRPromptService:
 
         self.promptFile = DRUtilsFile(DR_PROMPT_FILE_PATH)
 
-        self.prompt_queue = Queue()  # Single queue for all prompt processing
+        self.prompt_queue = DRTaskQueue()  # Single queue for all prompt processing
         self.producer = DRPromptProducer(self.prompt_queue, self.promptFile)
         self.consumer = DRPromptConsumer(self.prompt_queue, self)
 
@@ -126,10 +125,6 @@ class DRPromptService:
             A dictionary with the status information, or None if not found
         """
         return self.results.get(prompt_id)
-
-    def get_queue_size(self) -> int:
-        """Get the current size of the queue."""
-        return self.prompt_queue.qsize()
 
     def get_all_statuses(self) -> Dict[str, Dict[str, Any]]:
         """Get the status of all prompts."""
