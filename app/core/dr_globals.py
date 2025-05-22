@@ -7,7 +7,7 @@ DR_API = "Hi, master"
 DR_STATUS_LOG_INTERVAL = 10  # seconds
 DR_QUEUE_TIMEOUT = 1.0  # seconds
 DR_THREAD_JOIN_TIMEOUT = 5.0  # seconds
-DR_POLLING_INTERVAL = 0.1  # seconds prevent CPU hogging
+DR_POLLING_INTERVAL = 0.7  # seconds prevent CPU hogging
 
 
 DR_BASE_PATH = Path(__file__).parent.parent.absolute()

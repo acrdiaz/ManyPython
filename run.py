@@ -5,8 +5,9 @@ import uvicorn
 from app.services.dr_prompt_service import DRPromptService
 
 def main():
+    service = DRPromptService()
+
     try:
-        service = DRPromptService()
         service.start()
 
         uvicorn.run(
@@ -15,6 +16,7 @@ def main():
             port=8000, 
             reload=True
         )
+
     finally:
         service.stop()
 

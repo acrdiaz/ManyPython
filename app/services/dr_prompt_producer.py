@@ -25,7 +25,7 @@ class DRPromptProducer(threading.Thread):
                     continue
 
                 prompt_text = self.promptFile.dr_utils_load_prompt_file()
-                if not prompt_text.strip():
+                if not prompt_text:
                     continue
 
                 logger.info(f"Loaded prompt: {prompt_text}")

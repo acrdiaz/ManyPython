@@ -31,4 +31,4 @@ class DRUtilsFile:
         except FileNotFoundError:
             print(f"{self.file_path} file not found.")
         except Exception as e:
-            print(f"An error occurred while cleaning the prompt file: {e}")
+            print(f"An error occurred during cleaning the prompt file: {e}")

@@ -27,7 +27,7 @@ class DRPromptService:
     """
     A service that runs in the background and processes a queue of prompts.
     """
-    def __init__(self, processor_func: Callable[[str, Dict[str, Any]], Any] = None):
+    def __init__(self, processor_func: Callable[[str, Dict[str, Any]], Any] = None): # type: ignore
         """
         Initialize the prompt service.
         
