@@ -21,15 +21,15 @@ class DRPromptProducer(threading.Thread):
     def run(self):
         while not self._stop_event.is_set():
             try:
-                if self.promptFile.dr_utils_get_prompt_file_size() == 0:
+                if self.promptFile.get_file_size() == 0:
                     continue
 
-                prompt_text = self.promptFile.dr_utils_load_prompt_file()
+                prompt_text = self.promptFile.load_file()
                 if not prompt_text:
                     continue
 
                 logger.info(f"Loaded prompt: {prompt_text}")
-                self.promptFile.dr_utils_clean_prompt_file()
+                self.promptFile.clean_file()
                 
                 metadata = {'priority': 'Normal'}
                 prompt_id = f"prompt_{int(time.time() * 1000)}"

@@ -4,15 +4,15 @@ import os
 class DRUtilsFile:
     def __init__(self, file_path):
         self.file_path = file_path
-    
-    def dr_utils_get_prompt_file_size(self):
+
+    def get_file_size(self):
         try:
             return os.path.getsize(self.file_path)
         except FileNotFoundError:
             print(f"{self.file_path} file not found.")
             return 0
 
-    def dr_utils_load_prompt_file(self):
+    def load_file(self):
         try:
             with open(self.file_path, 'r') as file:
                 content = file.read().strip()
@@ -24,7 +24,16 @@ class DRUtilsFile:
             print(f"{self.file_path} file not found.")
             return None
 
-    def dr_utils_clean_prompt_file(self):
+    def write_file(self, prompt: str):
+        try:
+            with open(self.file_path, "w") as file:
+                file.write(prompt)
+        except FileNotFoundError:
+            print(f"{self.file_path} file not found.")
+        except Exception as e:
+            print(f"An error occurred while writting to the prompt file: {e}")
+
+    def clean_file(self):
         try:
             with open(self.file_path, "w") as file:
                 file.write("")

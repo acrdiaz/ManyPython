@@ -1,7 +1,9 @@
-from app.core.dr_globals import DR_API
+from app.core.dr_globals import DR_API, DR_PROMPT_FILE_PATH, DR_RESPONSE_FILE_PATH
+from app.utils.dr_utils_file import DRUtilsFile
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 
 # Import routers when you create them
 # from app.api.example_router import router as example_router
@@ -18,6 +20,8 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
+PROMPT_FILE = DRUtilsFile(DR_PROMPT_FILE_PATH)
+RESPONSE_FILE = DRUtilsFile(DR_RESPONSE_FILE_PATH)
 
 # Register routers
 # app.include_router(example_router)
@@ -26,10 +30,28 @@ app.add_middleware(
 async def root():
     return {"message": f"Welcome to the FastAPI application: {DR_API}"}
 
-# @app.post("/prompt/") ...................
-# async def create_prompt(prompt: str):
-#     if get_prompt_file_size() == 0:
-#         write_prompt_file(prompt)
-#         return {"message": "Prompt created successfully!", "prompt": prompt}
-#     else:
-#         return {"message": "Try again later, a prompt is in queue."}
+@app.post("/prompt/")
+async def create_prompt(prompt: str):
+    if PROMPT_FILE.get_file_size() == 0:
+        PROMPT_FILE.write_file(prompt)
+        return {"message": "Prompt created successfully!", "prompt": prompt}
+    else:
+        return {"message": "Try again later, a prompt is in queue."}
+
+@app.post("/")
+async def clear_prompt():
+    if PROMPT_FILE.get_file_size() > 0:
+        PROMPT_FILE.clean_file()
+
+    if RESPONSE_FILE.get_file_size() > 0:
+        RESPONSE_FILE.clean_file()
+
+    return {"message": "Prompt, response cleared successfully!"}
+
+@app.get("/response/")
+async def get_response():
+    if RESPONSE_FILE.get_file_size() > 0:
+        text = RESPONSE_FILE.load_file()
+        return {"message": f"{text}"}
+
+    return {"message": f"No response available."}

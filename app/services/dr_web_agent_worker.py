@@ -3,6 +3,9 @@ import logging
 import os
 import threading
 
+from app.core.dr_globals import DR_RESPONSE_FILE_PATH
+from app.utils.dr_utils_file import DRUtilsFile
+
 from browser_use import Agent, Browser, BrowserConfig
 from concurrent.futures import Executor, ThreadPoolExecutor
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -25,6 +28,8 @@ class DRWebAgentWorker:
         self._loop = asyncio.new_event_loop()
         self.executor = executor or ThreadPoolExecutor(max_workers=4)
         self._running = False
+
+        self._response_file = DRUtilsFile(DR_RESPONSE_FILE_PATH)
 
         if browser_name == "chrome":
             path_32 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
@@ -63,6 +68,11 @@ class DRWebAgentWorker:
         else:
             return None
 
+    def save_response(self, page_content):
+        last_result_content = page_content.final_result()
+        self._response_file.write_file(last_result_content)
+        logging.info(f"Response saved to {self._response_file.file_path}")
+
     async def main(self, prompt = ""):  
         llm = ChatGoogleGenerativeAI(
             model=DEFAULT_MODEL,
@@ -75,8 +85,10 @@ class DRWebAgentWorker:
             browser=self.browser,
         )
         
-        await agent.run()
+        page_content = await agent.run(max_steps=MAX_STEPS)
+        self.save_response(page_content)
         await agent.browser.close()
+
     # def process(self, prompt, callback=None):
     #     # """Submit prompt for processing"""
     #     # future = self.executor.submit(self._execute_agent_work, prompt, self.browser)

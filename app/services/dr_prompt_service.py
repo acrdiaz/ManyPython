@@ -40,11 +40,11 @@ class DRPromptService:
         self.results = {}  # Store results by prompt_id
         self.processor = processor_func or self._default_processor
 
-        self.promptFile = DRUtilsFile(DR_PROMPT_FILE_PATH)
+        self.prompt_file = DRUtilsFile(DR_PROMPT_FILE_PATH)
 
         self.prompt_queue = DRTaskQueue()  # Single queue for all prompt processing
         self.web_agent_worker = DRWebAgentWorker(DR_BROWSER)
-        self.producer = DRPromptProducer(self.prompt_queue, self.promptFile)
+        self.producer = DRPromptProducer(self.prompt_queue, self.prompt_file)
         self.consumer = DRPromptConsumer(self.prompt_queue, self.web_agent_worker)
 
         logger.info("DRPromptService initialized")
