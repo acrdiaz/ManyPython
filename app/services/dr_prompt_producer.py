@@ -10,7 +10,7 @@ logger = logging.getLogger('PromptService')
 
 class DRPromptProducer(threading.Thread):
     def __init__(self, queue, prompt_file):
-        super().__init__()
+        super().__init__(daemon=True)
         self.queue = queue
         self.promptFile = prompt_file
         self._stop_event = threading.Event()

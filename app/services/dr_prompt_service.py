@@ -4,8 +4,9 @@ from app.services.dr_prompt_producer import DRPromptProducer
 from app.core.dr_task_queue import DRTaskQueue
 from app.core.dr_globals import (
     DR_PROMPT_FILE_PATH,
-    DR_THREAD_JOIN_TIMEOUT
+    DR_BROWSER,
 )
+from app.services.dr_web_agent_worker import DRWebAgentWorker
 from app.utils.dr_utils_file import DRUtilsFile
 from typing import Dict, Any, Optional, List, Callable
 
@@ -42,8 +43,9 @@ class DRPromptService:
         self.promptFile = DRUtilsFile(DR_PROMPT_FILE_PATH)
 
         self.prompt_queue = DRTaskQueue()  # Single queue for all prompt processing
+        self.web_agent_worker = DRWebAgentWorker(DR_BROWSER)
         self.producer = DRPromptProducer(self.prompt_queue, self.promptFile)
-        self.consumer = DRPromptConsumer(self.prompt_queue, self)
+        self.consumer = DRPromptConsumer(self.prompt_queue, self.web_agent_worker)
 
         logger.info("DRPromptService initialized")
 
