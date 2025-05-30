@@ -1,4 +1,4 @@
-from app.services.dr_browser_agent import DRBrowserUseAgent
+# from app.services.dr_browser_agent import DRBrowserUseAgent
 from app.services.dr_prompt_consumer import DRPromptConsumer
 from app.services.dr_prompt_producer import DRPromptProducer
 from app.core.dr_task_queue import DRTaskQueue
@@ -55,8 +55,8 @@ class DRPromptService:
         logger.info(f"Metadata: {metadata}")
 
         # Using DRBrowserUseAgent from the separate file
-        browserAgent = DRBrowserUseAgent(browser_name="edge") # AA1 global
-        asyncio.run(browserAgent.main(prompt, metadata))
+        # browserAgent = DRBrowserUseAgent(browser_name="edge") # AA1 global
+        # asyncio.run(browserAgent.main(prompt, metadata))
 
         # Use metadata in the response if available
         priority = metadata.get('priority', 'normal')

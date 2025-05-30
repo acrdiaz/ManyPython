@@ -33,6 +33,9 @@ class DRPromptConsumer(threading.Thread):
     def run(self):
         while not self._stop_event.is_set():
             try:
+                # Small delay to prevent CPU hogging
+                time.sleep(DR_POLLING_INTERVAL)
+
                 if self.queue.empty():
                     continue
 
@@ -48,9 +51,6 @@ class DRPromptConsumer(threading.Thread):
                     logger.error(f"Error processing prompt {prompt_id}: {e}")
 
                 self.queue.task_done()
-
-                # Small delay to prevent CPU hogging
-                time.sleep(DR_POLLING_INTERVAL)
                 
             except Exception as e:
                 logger.error(f"Error in consumer thread: {str(e)}")

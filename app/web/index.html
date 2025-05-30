@@ -22,6 +22,7 @@
 
         #startStopButton,
         #sendMessageButton,
+        #getResponseButton,
         #speakResponseButton,
         #stopSpeakingButton {
             padding: 10px 20px;
@@ -62,6 +63,7 @@
     <hr>
     <button id="startStopButton">Start Listening</button>
     <button id="sendMessageButton">Send message</button>
+    <button id="getResponseButton">Get response</button>
     <button id="speakResponseButton">Speak response</button>
     <button id="stopSpeakingButton">Stop Speaking</button>
     <div id="promptDiv" contenteditable="true"></div>
@@ -77,6 +79,7 @@
                     languageSelect: document.getElementById('languageSelect'),
                     startStopButton: document.getElementById('startStopButton'),
                     sendMessageButton: document.getElementById('sendMessageButton'),
+                    getResponseButton: document.getElementById('getResponseButton'),
                     speakResponseButton: document.getElementById('speakResponseButton'),
                     stopSpeakingButton: document.getElementById('stopSpeakingButton'),
                     promptDiv: document.getElementById('promptDiv'),
@@ -85,7 +88,8 @@
 
                 // Configuration
                 this.config = {
-                    API_ENDPOINT: 'http://127.0.0.1:8000/prompt/',
+                    API_PROMPT_ENDPOINT: 'http://127.0.0.1:8000/prompt/',
+                    API_RESPONSE_ENDPOINT: 'http://127.0.0.1:8000/response/',
                     speechSettings: {
                         rate: 1.0,
                         pitch: 1.0,
@@ -398,7 +402,8 @@
                 if (!this.state.recognition) return;
 
                 this.elements.startStopButton.addEventListener('click', () => this.toggleListening());
-                this.elements.sendMessageButton.addEventListener('click', () => this.sendMessage());
+                this.elements.sendMessageButton.addEventListener('click', async () => await this.sendMessage());
+                this.elements.getResponseButton.addEventListener('click', async () => await this.getResponse());
                 this.elements.speakResponseButton.addEventListener('click', () => this.speakResponse());
                 this.elements.stopSpeakingButton.addEventListener('click', () => this.stopSpeaking());
 
@@ -442,6 +447,38 @@
             }
 
             /**
+             * Get response from the API
+             */
+            async getResponse() {
+                try {
+                    const response = await this.getMessageFromAPI();
+                    this.handleApiResponse(response);
+                } catch (error) {
+                    console.error('API Error:', error);
+                    this.displayMessage('Failed to get response from server');
+                }
+            }
+
+            async getMessageFromAPI() {
+                const url = `${this.config.API_RESPONSE_ENDPOINT}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' },
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                return await response.json();
+                // const data = await response.json();
+                // return data.message;
+                // document.getElementById('message').textContent = data.message;
+                // return await response.json();
+            }
+            
+            /**
              * Send the current message to the API
              */
             async sendMessage() {
@@ -460,8 +497,8 @@
              * @param {string} message - The message to send
              * @returns {Promise<Object>} API response
              */
-             async sendMessageToAPI(message) {
-                const url = `${this.config.API_ENDPOINT}?prompt=${encodeURIComponent(message)}`;
+            async sendMessageToAPI(message) {
+                const url = `${this.config.API_PROMPT_ENDPOINT}?prompt=${encodeURIComponent(message)}`;
                 
                 const response = await fetch(url, {
                     method: 'POST',

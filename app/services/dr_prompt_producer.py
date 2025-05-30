@@ -21,6 +21,9 @@ class DRPromptProducer(threading.Thread):
     def run(self):
         while not self._stop_event.is_set():
             try:
+                # Small delay to prevent CPU hogging
+                time.sleep(DR_POLLING_INTERVAL)
+
                 if self.promptFile.get_file_size() == 0:
                     continue
 
@@ -35,9 +38,6 @@ class DRPromptProducer(threading.Thread):
                 prompt_id = f"prompt_{int(time.time() * 1000)}"
 
                 self.queue.put((prompt_id, prompt_text, metadata))
-                
-                # Small delay to prevent CPU hogging
-                time.sleep(DR_POLLING_INTERVAL)
 
             except Exception as e:
                 logger.error(f"Error in producer thread: {str(e)}")

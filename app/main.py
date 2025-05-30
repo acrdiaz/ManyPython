@@ -4,6 +4,8 @@ from app.utils.dr_utils_file import DRUtilsFile
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from pydantic import BaseModel
+
 
 # Import routers when you create them
 # from app.api.example_router import router as example_router
@@ -26,19 +28,25 @@ RESPONSE_FILE = DRUtilsFile(DR_RESPONSE_FILE_PATH)
 # Register routers
 # app.include_router(example_router)
 
+class PromptRequest(BaseModel):
+    prompt: str
+
 @app.get("/")
 async def root():
     return {"message": f"Welcome to the FastAPI application: {DR_API}"}
 
 @app.post("/prompt/")
-async def create_prompt(prompt: str):
+async def create_prompt(request: PromptRequest):
+    prompt = request.prompt.strip()
+    if not prompt:
+        return {"message": "Prompt cannot be empty."}
     if PROMPT_FILE.get_file_size() == 0:
         PROMPT_FILE.write_file(prompt)
         return {"message": "Prompt created successfully!", "prompt": prompt}
     else:
         return {"message": "Try again later, a prompt is in queue."}
 
-@app.post("/")
+@app.post("/clearPrompt")
 async def clear_prompt():
     if PROMPT_FILE.get_file_size() > 0:
         PROMPT_FILE.clean_file()

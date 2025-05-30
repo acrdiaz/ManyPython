@@ -1,57 +1,59 @@
 import asyncio
 import logging
 import os
-import threading
+import time
+from typing import Optional
 
-from app.core.dr_globals import DR_RESPONSE_FILE_PATH
+from app.core.dr_globals import (
+    API_KEY, LLM_DEFAULT,
+    DR_RESPONSE_FILE_PATH,
+    MAX_STEPS,
+    LLM_GEMINI,
+    LLM_GPT,
+    LLM_DEFAULT,
+)
+from app.core.dr_system_prompts import DR_SYSTEM_PROMPTS, DR_SYSTEM_PROMPTS
 from app.utils.dr_utils_file import DRUtilsFile
 
 from browser_use import Agent, Browser, BrowserConfig
 from concurrent.futures import Executor, ThreadPoolExecutor
 from langchain_google_genai import ChatGoogleGenerativeAI
-from pydantic import SecretStr
-from functools import partial
-
-
-MAX_STEPS = 30
-MAX_ACTIONS_PER_STEP = 10
-
-API_KEY = SecretStr(os.getenv("GEMINI_API_KEY")) # type: ignore
-LLM_GEMINI = 'gemini-2.0-flash'
-LLM_GPT = 'gpt-4o-mini'
-
-DEFAULT_MODEL = LLM_GEMINI
+from langchain_openai import ChatOpenAI
 
 
 class DRWebAgentWorker:
-    def __init__(self, browser_name = "chrome", executor: Executor = None):  # type: ignore
+    def __init__(self,
+                 browser_name: str = "chrome",
+                 headless: bool = False,
+                 executor: Executor = None): # type: ignore
         self._loop = asyncio.new_event_loop()
         self.executor = executor or ThreadPoolExecutor(max_workers=4)
         self._running = False
 
         self._response_file = DRUtilsFile(DR_RESPONSE_FILE_PATH)
 
-        if browser_name == "chrome":
+        if browser_name.lower() == "chrome":
             path_32 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
             path_64 = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
-        elif browser_name == "edge":
+        elif browser_name.lower() == "edge":
             path_32 = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
             path_64 = "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"
         else:
             raise FileNotFoundError(f"Browser not supported: {browser_name}")
 
-        path = self.app_exits(path_32, path_64)
+        browser_path = self._app_exits(path_32, path_64)
 
-        if path is None:
+        if browser_path is None:
             raise FileNotFoundError(f"Browser path file not found: {browser_name}")
 
         self.browser = Browser(
             config=BrowserConfig(
-                chrome_instance_path=path,
+                chrome_instance_path=browser_path,
+                headless=headless,
             )
         )
 
-    def app_exits(self, path_32, path_64):
+    def _app_exits(self, path_32, path_64):
         """Check if the application exists in the given paths.
 
         Args:
@@ -66,28 +68,77 @@ class DRWebAgentWorker:
         elif os.path.exists(path_64):
             return path_64
         else:
-            return None
+            raise FileNotFoundError(f"Browser executable not found.")
 
-    def save_response(self, page_content):
+    def _create_llm(self, llm_model: str = LLM_DEFAULT):
+        if not API_KEY:
+            # logging.info("No API key provided for LLM")
+            raise ValueError("No API key provided for LLM")
+
+        if llm_model == LLM_GEMINI:
+            return ChatGoogleGenerativeAI(
+                model=llm_model,
+                api_key=API_KEY,
+            )
+        elif llm_model == LLM_GPT:
+            return ChatOpenAI(
+                model=llm_model,
+            )
+        else:
+            raise ValueError(f"Unsupported LLM model: {llm_model}")
+
+    def _save_response(self, page_content):
         last_result_content = page_content.final_result()
         self._response_file.write_file(last_result_content)
         logging.info(f"Response saved to {self._response_file.file_path}")
 
-    async def main(self, prompt = ""):  
-        llm = ChatGoogleGenerativeAI(
-            model=DEFAULT_MODEL,
-            api_key=API_KEY,
-        )
+    async def direct_llm_question(self, prompt: str, llm_model: str = LLM_DEFAULT):
+        """Get direct response from LLM for simple knowledge queries."""
+        try:
+            prompt_llm = DR_SYSTEM_PROMPTS.direct_llm_question(prompt)
+            # logging.info(f"Prompt for LLM: {prompt_llm}")
+            llm = self._create_llm(llm_model)
+            response = llm.invoke(prompt_llm)
+            answer = response.content.strip() # type: ignore
+            return None if "NEEDS_BROWSER" in answer else answer
+
+        except Exception as e:
+            print(f"Error getting LLM response: {e}")
+            return None
+
+    async def main(self, prompt: str, llm_model: str = LLM_DEFAULT):
+        llm = self._create_llm(llm_model)
+
+        additional_information = DR_SYSTEM_PROMPTS.prompt_additional_information("")
+
+        # Add context about error recovery
+        error_recovery_context = DR_SYSTEM_PROMPTS.prompt_error_recovery()
+
+        prompt_combined = f"{prompt}.\n{additional_information or ''}\n{error_recovery_context or ''}"
 
         agent = Agent(
-            task=prompt,
+            task=prompt_combined,
+            # message_context=combined_context,
+            # planner_llm=planner_llm,
+            # planner_interval=1,
             llm=llm,
             browser=self.browser,
+            # max_actions_per_step=MAX_ACTIONS_PER_STEP,
+            # max_failures=2,
+            # retry_delay=1,                            # Short delay between retries
         )
         
+        time_start = time.time()
+        logging.info(f"Running browser agent with prompt: {prompt[:50]}...")
+
         page_content = await agent.run(max_steps=MAX_STEPS)
-        self.save_response(page_content)
-        await agent.browser.close()
+        self._save_response(page_content)
+
+        time_duration = time.time() - time_start
+        logging.info(f"Agent completed in {time_duration:.2f} seconds")
+
+        await agent.browser.close() # type: ignore
+        await self.browser.close() # type: ignore # AA1 is this needed?
 
     # def process(self, prompt, callback=None):
     #     # """Submit prompt for processing"""
