@@ -132,6 +132,7 @@
                     currentLanguage: 'auto',
                     voices: [],
                     selectedVoice: null,
+                    autoRefreshInterval: null, // Add this line to track the interval
                 };
 
                 // Initialize voice settings
@@ -498,18 +499,21 @@
              * @returns {Promise<Object>} API response
              */
             async sendMessageToAPI(message) {
-                const url = `${this.config.API_PROMPT_ENDPOINT}?prompt=${encodeURIComponent(message)}`;
-                
+                const url = `${this.config.API_PROMPT_ENDPOINT}`;
+
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ prompt: message })
                 });
-                
-                if (!response.ok) {
+
+                if (response.ok) {
+                    this.startAutoRefresh();
+                }
+                else {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                
+
                 return await response.json();
             }
 
@@ -526,6 +530,10 @@
              * @param {string} text - The message to display and speak
              */
             displayMessage(text) {
+                if (this.elements.responseDiv.innerHTML == text) {
+                    return;
+                }
+
                 this.elements.responseDiv.innerHTML = text;
                 this.speak(text);
             }
@@ -589,6 +597,7 @@
             stopSpeaking() {
                 if (this.state.synth.speaking) {
                     this.state.synth.cancel();
+                    this.stopAutoRefresh();
                     console.log('Speech stopped');
                 }
             }
@@ -601,18 +610,50 @@
             }
 
             /**
-             * Clean up resources (stop speech synthesis)
+             * Start auto-refreshing the response every 10 seconds
+             */
+            startAutoRefresh() {
+                // Clear any existing interval first
+                if (this.state.autoRefreshInterval) {
+                    clearInterval(this.state.autoRefreshInterval);
+                }
+                
+                // Set up new interval to call getResponse every 10 seconds
+                this.state.autoRefreshInterval = setInterval(async () => {
+                    console.log('Auto-refreshing response...');
+                    await this.getResponse();
+                }, 10000); // 10000 milliseconds = 10 seconds
+                
+                console.log('Auto-refresh started - checking for responses every 10 seconds');
+            }
+
+            /**
+             * Stop the auto-refresh interval
+             */
+            stopAutoRefresh() {
+                if (this.state.autoRefreshInterval) {
+                    clearInterval(this.state.autoRefreshInterval);
+                    this.state.autoRefreshInterval = null;
+                    console.log('Auto-refresh stopped');
+                }
+            }
+
+            /**
+             * Clean up resources (stop speech synthesis and intervals)
              */
             cleanup() {
                 if (this.state.synth.speaking) {
                     this.state.synth.cancel();
                 }
+                
+                // Also clear the interval when cleaning up
+                this.stopAutoRefresh();
             }
         }
 
         // Initialize the application when the DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
-            new SpeechToTextApp();
+            const app = new SpeechToTextApp();
         });
     </script>
 </body>

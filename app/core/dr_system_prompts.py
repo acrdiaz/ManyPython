@@ -23,6 +23,11 @@ class DRSystemPrompts:
     
     @staticmethod
     def prompt_additional_information(text: str) -> str:
+        if text == "Direct Question":
+            return (
+                "Communicate the answer properly, based on the question.\n"
+            )
+
         return (
             ""
         )
@@ -30,7 +35,7 @@ class DRSystemPrompts:
     @staticmethod
     def prompt_error_recovery() -> str:
         return (
-            "If a click fails (no action):\n"
+            "If a click fails, proceed:\n"
             "1. Verify is enabled and note its text.\n"
             "2. Retry once.\n"
             "3. If still unresponsive:\n"

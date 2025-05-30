@@ -87,34 +87,44 @@ class DRWebAgentWorker:
         else:
             raise ValueError(f"Unsupported LLM model: {llm_model}")
 
-    def _save_response(self, page_content):
+    def _save_browser_response(self, page_content):
         last_result_content = page_content.final_result()
-        self._response_file.write_file(last_result_content)
+        self._save_text_response(last_result_content)
+
+    def _save_text_response(self, text):
+        self._response_file.write_file(text)
         logging.info(f"Response saved to {self._response_file.file_path}")
 
-    async def direct_llm_question(self, prompt: str, llm_model: str = LLM_DEFAULT):
+    async def direct_llm_question(self, prompt: str, llm):
         """Get direct response from LLM for simple knowledge queries."""
         try:
-            prompt_llm = DR_SYSTEM_PROMPTS.direct_llm_question(prompt)
+            additional_information = DR_SYSTEM_PROMPTS.prompt_additional_information("Direct Question")
+
+            prompt_combined = f"{prompt}.\n{additional_information or ''}"
+
+            prompt_llm = DR_SYSTEM_PROMPTS.direct_llm_question(prompt_combined)
             # logging.info(f"Prompt for LLM: {prompt_llm}")
-            llm = self._create_llm(llm_model)
             response = llm.invoke(prompt_llm)
             answer = response.content.strip() # type: ignore
+
+            if answer != "NEEDS_BROWSER":
+                self._save_text_response(answer)
+
             return None if "NEEDS_BROWSER" in answer else answer
 
         except Exception as e:
             print(f"Error getting LLM response: {e}")
             return None
 
-    async def main(self, prompt: str, llm_model: str = LLM_DEFAULT):
-        llm = self._create_llm(llm_model)
-
+    async def browse_web(self, prompt: str, llm):
         additional_information = DR_SYSTEM_PROMPTS.prompt_additional_information("")
 
         # Add context about error recovery
         error_recovery_context = DR_SYSTEM_PROMPTS.prompt_error_recovery()
-
+        
         prompt_combined = f"{prompt}.\n{additional_information or ''}\n{error_recovery_context or ''}"
+
+        # print(f"🧠 Combined prompt: {prompt_combined[:50]}...")  # Debugging output
 
         agent = Agent(
             task=prompt_combined,
@@ -124,7 +134,7 @@ class DRWebAgentWorker:
             llm=llm,
             browser=self.browser,
             # max_actions_per_step=MAX_ACTIONS_PER_STEP,
-            # max_failures=2,
+            # max_failures=1,
             # retry_delay=1,                            # Short delay between retries
         )
         
@@ -132,13 +142,28 @@ class DRWebAgentWorker:
         logging.info(f"Running browser agent with prompt: {prompt[:50]}...")
 
         page_content = await agent.run(max_steps=MAX_STEPS)
-        self._save_response(page_content)
+        self._save_browser_response(page_content)
 
         time_duration = time.time() - time_start
         logging.info(f"Agent completed in {time_duration:.2f} seconds")
 
         await agent.browser.close() # type: ignore
         await self.browser.close() # type: ignore # AA1 is this needed?
+
+    async def main(self, prompt: str, llm_model: str = LLM_DEFAULT):
+        logging.info(f"🧠 Agent found a prompt: {prompt[:50]}...")
+
+        llm = self._create_llm(llm_model)
+
+        # Agent A
+        logging.info(f"🧠 Agent A - direct question")
+        answer = await self.direct_llm_question(prompt, llm)
+        if answer != "NEEDS_BROWSER":
+            return
+
+        # Agent B
+        logging.info(f"🧠 Agent B - browse the web")
+        await self.browse_web(prompt, llm)
 
     # def process(self, prompt, callback=None):
     #     # """Submit prompt for processing"""
