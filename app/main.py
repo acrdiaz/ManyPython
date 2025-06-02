@@ -1,4 +1,9 @@
-from app.core.dr_globals import DR_AGENT_RUNNNG, DR_API, DR_PROMPT_FILE_PATH, DR_RESPONSE_FILE_PATH
+from app.core.dr_globals import (
+    DR_API,
+    DR_PROMPT_FILE_PATH,
+    DR_RESPONSE_FILE_PATH,
+    DR_GLOBALS
+)
 from app.utils.dr_utils_file import DRUtilsFile
 
 from fastapi import FastAPI
@@ -6,6 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from pydantic import BaseModel
 
+import app.core.dr_globals
 
 # Import routers when you create them
 # from app.api.example_router import router as example_router
@@ -58,10 +64,9 @@ async def clear_prompt_response():
 
 @app.get("/response/")
 async def get_response():
-    global DR_AGENT_RUNNNG    
-    print(f"DR_AGENT_RUNNNG: {DR_AGENT_RUNNNG}")
+    print(f"DR_AGENT_RUNNNG: {DR_GLOBALS.DR_AGENT_RUNNNG}")
 
-    if DR_AGENT_RUNNNG:
+    if DR_GLOBALS.DR_AGENT_RUNNNG:
         return {"message": f"Please wait."}
         # return {"message": "Please wait, the agent is still processing."}
 

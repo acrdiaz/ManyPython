@@ -35,5 +35,8 @@ API_KEY = SecretStr(os.getenv("GEMINI_API_KEY")) # type: ignore
 # --- Secrets ---
 
 # --- Agent status ---
-# global DR_AGENT_RUNNNG
-DR_AGENT_RUNNNG = False
+class DRGlobals:
+    def __init__(self):
+        self.DR_AGENT_RUNNNG = False
+
+DR_GLOBALS = DRGlobals()

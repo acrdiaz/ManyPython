@@ -5,13 +5,14 @@ import time
 from typing import Optional
 
 from app.core.dr_globals import (
-    API_KEY, LLM_DEFAULT,
+    API_KEY,
+    LLM_DEFAULT,
     DR_RESPONSE_FILE_PATH,
     MAX_STEPS,
     LLM_GEMINI,
     LLM_GPT,
     LLM_DEFAULT,
-    DR_AGENT_RUNNNG,
+    DR_GLOBALS,
 )
 from app.core.dr_system_prompts import DR_SYSTEM_PROMPTS, DR_SYSTEM_PROMPTS
 from app.utils.dr_utils_file import DRUtilsFile
@@ -93,8 +94,7 @@ class DRWebAgentWorker:
         self._save_text_response(last_result_content)
 
     def _save_text_response(self, text):
-        global DR_AGENT_RUNNNG
-        DR_AGENT_RUNNNG = False
+        DR_GLOBALS.DR_AGENT_RUNNNG = False
         self._response_file.write_file(text)
         logging.info(f"Response saved to {self._response_file.file_path}")
 
@@ -154,9 +154,9 @@ class DRWebAgentWorker:
         await self.browser.close() # type: ignore # AA1 is this needed?
 
     async def main(self, prompt: str, llm_model: str = LLM_DEFAULT):
-        global DR_AGENT_RUNNNG
-        DR_AGENT_RUNNNG = True
-        print(f"DR_AGENT_RUNNNG: {DR_AGENT_RUNNNG}")
+        DR_GLOBALS.DR_AGENT_RUNNNG = True
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        print(f"DR_AGENT_RUNNNG: {DR_GLOBALS.DR_AGENT_RUNNNG}")
 
         logging.info(f"🧠 Agent found a prompt: {prompt[:50]}...")
 
