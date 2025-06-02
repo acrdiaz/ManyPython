@@ -32,11 +32,11 @@ class DRSystemPrompts:
     def prompt_error_recovery() -> str:
         return (
             "If a click fails, proceed:\n"
-            "1. Verify is enabled and note its text.\n"
-            "2. Retry once.\n"
+            "1. Verify is enabled and remember its text.\n"
+            "2. If enabled retry once.\n"
             "3. If still unresponsive:\n"
-            "   - Report: 'Help needed: Clicked ELEMENT '[text]' ([selector]), but no action. Page: [context].'\n"
-            "   - Pause for human help.\n"
+            "   - Report: 'Help needed: Clicked ELEMENT '[text]', but no action.'\n"
+            "   - Finish Agent.\n"
         )
 
     # --- Heavy Prompts (Cached) ---

@@ -1,4 +1,4 @@
-from app.core.dr_globals import DR_API, DR_PROMPT_FILE_PATH, DR_RESPONSE_FILE_PATH
+from app.core.dr_globals import DR_AGENT_RUNNNG, DR_API, DR_PROMPT_FILE_PATH, DR_RESPONSE_FILE_PATH
 from app.utils.dr_utils_file import DRUtilsFile
 
 from fastapi import FastAPI
@@ -58,9 +58,12 @@ async def clear_prompt_response():
 
 @app.get("/response/")
 async def get_response():
+    if DR_AGENT_RUNNNG:
+        return {"message": f"Please wait."}
+        # return {"message": "Please wait, the agent is still processing."}
+
     if RESPONSE_FILE.get_file_size() > 0:
         text = RESPONSE_FILE.load_file()
         return {"message": f"{text}"}
 
     return {"message": f"No response available."}
-    # return {"message": f"Please wait."}

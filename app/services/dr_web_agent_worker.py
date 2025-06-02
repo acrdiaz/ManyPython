@@ -11,6 +11,7 @@ from app.core.dr_globals import (
     LLM_GEMINI,
     LLM_GPT,
     LLM_DEFAULT,
+    DR_AGENT_RUNNNG,
 )
 from app.core.dr_system_prompts import DR_SYSTEM_PROMPTS, DR_SYSTEM_PROMPTS
 from app.utils.dr_utils_file import DRUtilsFile
@@ -93,6 +94,7 @@ class DRWebAgentWorker:
 
     def _save_text_response(self, text):
         self._response_file.write_file(text)
+        DR_AGENT_RUNNNG = False
         logging.info(f"Response saved to {self._response_file.file_path}")
 
     async def direct_llm_question(self, prompt: str, llm):
@@ -134,8 +136,8 @@ class DRWebAgentWorker:
             llm=llm,
             browser=self.browser,
             # max_actions_per_step=MAX_ACTIONS_PER_STEP,
-            # max_failures=1,
-            # retry_delay=1,                            # Short delay between retries
+            max_failures=1,
+            retry_delay=1,                            # Short delay in seconds between retries
         )
         
         time_start = time.time()
@@ -152,6 +154,8 @@ class DRWebAgentWorker:
 
     async def main(self, prompt: str, llm_model: str = LLM_DEFAULT):
         logging.info(f"🧠 Agent found a prompt: {prompt[:50]}...")
+
+        DR_AGENT_RUNNNG = True
 
         llm = self._create_llm(llm_model)
 

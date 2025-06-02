@@ -33,3 +33,6 @@ LLM_DEFAULT = LLM_GEMINI
 API_KEY = SecretStr(os.getenv("GEMINI_API_KEY")) # type: ignore
 
 # --- Secrets ---
+
+# --- Agent status ---
+DR_AGENT_RUNNNG = False

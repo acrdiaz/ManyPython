@@ -90,6 +90,7 @@
                 this.config = {
                     API_PROMPT_ENDPOINT: 'http://127.0.0.1:8000/prompt/',
                     API_RESPONSE_ENDPOINT: 'http://127.0.0.1:8000/response/',
+                    API_CLEAR_ENDPOINT: 'http://127.0.0.1:8000/clearPromptResponse/',
                     speechSettings: {
                         rate: 1.0,
                         pitch: 1.0,
@@ -485,6 +486,8 @@
             async sendMessage() {
                 const message = this.elements.promptDiv.innerHTML;
                 try {
+                    .....
+
                     const response = await this.sendMessageToAPI(message);
                     this.handleApiResponse(response);
                 } catch (error) {
