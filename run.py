@@ -2,7 +2,6 @@
 #   py run.py
 
 import uvicorn
-from app.core.dr_globals import DR_PROMPT_FILE_PATH
 from app.services.dr_prompt_service import DRPromptService
 from app.utils.dr_utils_file import DRUtilsFile
 

@@ -11,8 +11,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from pydantic import BaseModel
 
-import app.core.dr_globals
-
 # Import routers when you create them
 # from app.api.example_router import router as example_router
 
