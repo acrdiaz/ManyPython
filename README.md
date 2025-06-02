@@ -32,7 +32,7 @@ sample response
 
 ### POST prompt
 ```bash
-curl -X POST -H "Content-Type: application/json" -d "{\"prompt\":\"Open wikipedia\"}" http://127.0.0.1:8000/prompt/
+curl -X POST -H "Content-Type: application/json" -d "{\"prompt\":\"Open google.com website\"}" http://127.0.0.1:8000/prompt/
 ```
 sample response
 ```bash

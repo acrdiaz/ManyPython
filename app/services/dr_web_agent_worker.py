@@ -93,8 +93,9 @@ class DRWebAgentWorker:
         self._save_text_response(last_result_content)
 
     def _save_text_response(self, text):
-        self._response_file.write_file(text)
+        global DR_AGENT_RUNNNG
         DR_AGENT_RUNNNG = False
+        self._response_file.write_file(text)
         logging.info(f"Response saved to {self._response_file.file_path}")
 
     async def direct_llm_question(self, prompt: str, llm):
@@ -153,9 +154,11 @@ class DRWebAgentWorker:
         await self.browser.close() # type: ignore # AA1 is this needed?
 
     async def main(self, prompt: str, llm_model: str = LLM_DEFAULT):
-        logging.info(f"🧠 Agent found a prompt: {prompt[:50]}...")
-
+        global DR_AGENT_RUNNNG
         DR_AGENT_RUNNNG = True
+        print(f"DR_AGENT_RUNNNG: {DR_AGENT_RUNNNG}")
+
+        logging.info(f"🧠 Agent found a prompt: {prompt[:50]}...")
 
         llm = self._create_llm(llm_model)
 

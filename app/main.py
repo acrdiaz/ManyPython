@@ -58,6 +58,9 @@ async def clear_prompt_response():
 
 @app.get("/response/")
 async def get_response():
+    global DR_AGENT_RUNNNG    
+    print(f"DR_AGENT_RUNNNG: {DR_AGENT_RUNNNG}")
+
     if DR_AGENT_RUNNNG:
         return {"message": f"Please wait."}
         # return {"message": "Please wait, the agent is still processing."}
