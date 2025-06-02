@@ -21,9 +21,9 @@ sample response
 {"message":"No response available."}
 ```
 
-### POST clearPrompt
+### POST clearPromptResponse
 ```bash
-curl -X POST http://127.0.0.1:8000/clearPrompt
+curl -X POST http://127.0.0.1:8000/clearPromptResponse/
 ```
 sample response
 ```json

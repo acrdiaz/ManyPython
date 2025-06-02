@@ -158,7 +158,7 @@ class DRWebAgentWorker:
         # Agent A
         logging.info(f"🧠 Agent A - direct question")
         answer = await self.direct_llm_question(prompt, llm)
-        if answer != "NEEDS_BROWSER":
+        if answer != None:
             return
 
         # Agent B

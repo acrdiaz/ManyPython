@@ -17,17 +17,13 @@ class DRSystemPrompts:
     def direct_llm_question(text: str) -> str:
         return (
             f"Prompt: {text}.\n"
+            "Communicate the answer properly, based on the question.\n"
             "If the Prompt is a simple knowledge query, answer it.\n"
             "If the Prompt looks like instructions to interact with a website, respond with 'NEEDS_BROWSER'."
         )
     
     @staticmethod
     def prompt_additional_information(text: str) -> str:
-        if text == "Direct Question":
-            return (
-                "Communicate the answer properly, based on the question.\n"
-            )
-
         return (
             ""
         )

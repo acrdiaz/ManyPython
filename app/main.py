@@ -46,8 +46,8 @@ async def create_prompt(request: PromptRequest):
     else:
         return {"message": "Try again later, a prompt is in queue."}
 
-@app.post("/clearPrompt")
-async def clear_prompt():
+@app.post("/clearPromptResponse/")
+async def clear_prompt_response():
     if PROMPT_FILE.get_file_size() > 0:
         PROMPT_FILE.clean_file()
 
@@ -63,3 +63,4 @@ async def get_response():
         return {"message": f"{text}"}
 
     return {"message": f"No response available."}
+    # return {"message": f"Please wait."}
