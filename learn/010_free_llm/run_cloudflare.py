@@ -11,10 +11,11 @@ curl  https://api.cloudflare.com/client/v4/accounts/53d1e4ee79403e5b5690ec302de9
 fix format...
 """
 
+import os
 import requests
 
 
-API_TOKEN = "API_TOKEN"
+API_TOKEN = os.getenv('CLOUDFLARE_API_KEY')
 API_BASE_URL = "https://api.cloudflare.com/client/v4/accounts/53d1e4ee79403e5b5690ec302de94bda/ai/run/"
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
